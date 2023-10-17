@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:untitled/account/create_account.dart';
 import 'package:untitled/account/forgot_password.dart';
 
+import 'account/handle_login.dart';
+
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,18 +37,20 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Image.asset("images/login.png", width: 300),
                 const SizedBox(height: 20),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Email',
                   ),
                 ),
                 const SizedBox(height: 10),
-                const TextField(
+                TextField(
+                  controller: passwordController,
                   obscureText: true,
                   enableSuggestions: false,
                   autocorrect: false,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Lösenord',
                   ),
@@ -66,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, "/main");
+                      HandleLogin(context, emailController.text, passwordController.text);
                     },
                     style: ElevatedButton.styleFrom(
                     textStyle: const TextStyle(
