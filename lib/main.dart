@@ -5,6 +5,7 @@ import '/pages/profile_page/profile_page.dart';
 import '/pages/students_page/students_page.dart';
 import '/pages/universities_page/universities_page.dart';
 import 'app_bar.dart';
+import 'global_variables.dart' as globals;
 
 
 void main() => runApp(const MyApp());

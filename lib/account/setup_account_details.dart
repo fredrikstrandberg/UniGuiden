@@ -1,17 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/account/create_account.dart';
 import 'package:untitled/account/select_account_type.dart';
 import 'package:untitled/pages/page_identifier.dart';
 import '/app_bar.dart';
+import 'account.dart';
 import 'check_account.dart';
+import 'account_list.dart';
 
 
 class SetupAccountDetails extends StatelessWidget {
-  SetupAccountDetails({super.key});
+  SetupAccountDetails({super.key, required this.email, required this.password});
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final repeatPasswordController = TextEditingController();
+  final String email;
+  final String password;
 
+  final nameController = TextEditingController();
+  final birthDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,54 +36,50 @@ class SetupAccountDetails extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextField(
-                      controller: emailController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Namn',
-                      ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextField(
+                          controller: nameController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Namn',
+                          ),
+                        ),
+
+                        //TBD: Lägga in datepicker
+
+                        TextField(
+                          controller: birthDateController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Födelsedatum (ÅÅÅÅ-MM-DD)',
+                          ),
+                        ),
+
+                        const SizedBox(height: 10),
+                        ElevatedButton(
+                            onPressed: () {
+                              CreateAccount(
+                                context,
+                                email,
+                                password,
+                                nameController.text,
+                                birthDateController.text,
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                textStyle: const TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: "YoungSerif"),
+                                backgroundColor: Colors.blue[900]),
+                            child: const Text("Skapa konto")
+                        ),
+                      ],
                     ),
-                    TextField(
-                      controller: emailController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Ålder',
-                      ),
-                    ),
-                    TextField(
-                      controller: emailController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Namn',
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (CheckAccount(
-                            context,
-                            emailController.text,
-                            passwordController.text,
-                            repeatPasswordController.text,
-                          ) != null){
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => SelectAccountType(),
-                              ),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(
-                                fontSize: 20,
-                                fontFamily: "YoungSerif"),
-                            backgroundColor: Colors.blue[900]),
-                        child: const Text("Skapa konto")
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -89,5 +90,31 @@ class SetupAccountDetails extends StatelessWidget {
   }
 }
 
+class DatePicker extends StatefulWidget {
+  const DatePicker({super.key});
+
+  @override
+  State<DatePicker> createState() => _DatePickerState();
+}
+
+
+class _DatePickerState extends State<DatePicker> {
+
+  DateTime dateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  TextEditingController dateInput = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      CupertinoDatePicker(
+        initialDateTime: dateTime,
+        mode: CupertinoDatePickerMode.date,
+        use24hFormat: true,
+        onDateTimeChanged: (DateTime chosenDate) {
+          setState(() => dateTime = chosenDate);
+    }
+    );
+  }
+}
 
 

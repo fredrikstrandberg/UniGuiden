@@ -68,7 +68,10 @@ class SetupAccount extends StatelessWidget {
                           ) != null){
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => SetupAccountDetails(),
+                                builder: (context) => SetupAccountDetails(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                ),
                               ),
                             );
                           }

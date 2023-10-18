@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../account/account_list.dart';
+import '../../global_variables.dart';
 import '/pages/page_identifier.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -35,25 +37,25 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ]
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(10,30,10,0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10,30,10,0),
               child: Column(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                       radius: 100,
                       backgroundImage: AssetImage("images/profile.png"),
                       backgroundColor: Colors.transparent,
                       ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    "Anders Andersson",
-                    style: TextStyle(
+                    GlobalVariables.curLoggedIn.name,
+                    style: const TextStyle(
                         fontSize: 20,
                         fontFamily: "YoungSerif",
                     ),
                   ),
-                  SizedBox(height: 40),
-                  Row(
+                  const SizedBox(height: 40),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
