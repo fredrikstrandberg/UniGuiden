@@ -3,18 +3,39 @@ import 'package:flutter/material.dart';
 import 'package:untitled/pages/pop_up.dart';
 import 'account.dart';
 import 'account_list.dart';
+import 'package:email_validator/email_validator.dart';
 
 
 HandleLogin(context, email, password) {
 
-  if (accountMap[email] == password) {
-    Navigator.pushReplacementNamed(context, "/main");
+  bool validEmail = EmailValidator.validate(email);
+  bool passInput = password.toString().isNotEmpty;
+
+  if (!validEmail || !passInput) {
+    if (!validEmail) {
+      return HandleLoginError(context, "Fyll i en giltig email");
+    }
+    else {
+      return HandleLoginError(context, "Fyll i lösenord");
+    }
   }
-  else if (accountMap[email] == null) {
-    return HandleLoginError(context, "Email är inte registrerad");
-  }
+
+  // om ifyllda
   else {
-    return HandleLoginError(context, "Felaktigt lösenord");
+    // kolla att email registrerad
+    if (accountMap[email] == null) {
+      return HandleLoginError(context, "Email är inte registrerad");
+    }
+    // om registrered
+    else {
+      // kolla att lösenord stämmer
+      if (accountMap[email] == password) {
+        Navigator.pushReplacementNamed(context, "/main");
+      }
+      else {
+        return HandleLoginError(context, "Felaktigt lösenord");
+      }
+    }
   }
 }
 

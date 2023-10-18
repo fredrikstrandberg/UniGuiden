@@ -4,14 +4,14 @@ import 'account_list.dart';
 import 'handle_login.dart';
 
 
-CreateAccount(context, email, password, repeatPassword) {
+CheckAccount(context, email, password, repeatPassword) {
   bool validEmail = EmailValidator.validate(email);
   bool passInput = password.toString().isNotEmpty;
   bool repeatPassInput = repeatPassword.toString().isNotEmpty;
   List regEmails = accountMap.keys.toList();
   // bool passLengthCheck = (password.toString().length >= 8);
 
-  if (!validEmail || !passInput || !repeatPassword) {
+  if (!validEmail || !passInput || !repeatPassInput) {
     if (!validEmail) {
       return HandleLoginError(context, "Fyll i en giltig email");
     }
@@ -32,8 +32,7 @@ CreateAccount(context, email, password, repeatPassword) {
       return HandleLoginError(context, "Lösenorden stämmer inte överens");
     }
     else {
-      accountMap[email] = password;
-      Navigator.pushNamedAndRemoveUntil(context, "/main", (Route<dynamic> route) => false);
+      return true;
     }
   }
 }

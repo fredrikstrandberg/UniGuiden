@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/account/create_account.dart';
 import 'package:untitled/account/forgot_password.dart';
-
 import 'account/handle_login.dart';
+import 'account/select_account_type.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
 
 
@@ -39,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 TextField(
                   controller: emailController,
+                  autocorrect: false,
                   decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Email',
@@ -88,16 +88,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Har du inget konto?"),
+                    const Text("Har du inget konto?"),
                     TextButton(
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => const CreateAccountPage(),
+                              builder: (context) => SelectAccountType(),
                             ),
                           );
                         },
-                        child: Text("Skapa konto")
+                        child: const Text("Skapa konto")
                     ),
                   ],
                 )
