@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 import '/pages/home_page/home_page.dart';
 import '/pages/message_page/messages_page.dart';
 import '/pages/profile_page/profile_page.dart';
 import '/pages/students_page/students_page.dart';
 import '/pages/universities_page/universities_page.dart';
+import 'DB/users_database.dart';
 import 'app_bar.dart';
 
-
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Se till att Flutter-ramverket är initialiserat.
+  final db = await UsersDatabase.instance.database;
+  runApp(MyApp(db: db));
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Database db;
+
+  MyApp({Key? key, required this.db}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: MainScreen(),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  MainScreen({Key? key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -31,17 +38,17 @@ class _MainScreenState extends State<MainScreen> {
   int curIndex = 0;
 
   List<Widget> widgetOptions = <Widget>[
-    const HomePage(),
-    const StudentsPage(),
-    const UniversitiesPage(),
-    const MessagePage(),
-    const ProfilePage(),
+    HomePage(),
+    StudentsPage(),
+    UniversitiesPage(),
+    MessagePage(),
+    ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: curIndex,
         selectedItemColor: Colors.blue[900],
@@ -54,24 +61,24 @@ class _MainScreenState extends State<MainScreen> {
         unselectedFontSize: 12,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Hem",
+            icon: Icon(Icons.home),
+            label: "Hem",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              label: "Studenter",
+            icon: Icon(Icons.people),
+            label: "Studenter",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: "Universitet",
+            icon: Icon(Icons.school),
+            label: "Universitet",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.message),
-              label: "Meddelanden",
+            icon: Icon(Icons.message),
+            label: "Meddelanden",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "Profil",
+            icon: Icon(Icons.person),
+            label: "Profil",
           ),
         ],
         onTap: (index) {
@@ -84,4 +91,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-

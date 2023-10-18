@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:untitled/account/create_account.dart';
 import 'package:untitled/account/forgot_password.dart';
 
+import 'DB/users_database.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -10,6 +12,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,18 +36,20 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Image.asset("images/login.png", width: 300),
                 const SizedBox(height: 20),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: usernameController,
+                  decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Email',
                   ),
                 ),
                 const SizedBox(height: 10),
-                const TextField(
+                TextField(
                   obscureText: true,
                   enableSuggestions: false,
                   autocorrect: false,
-                  decoration: InputDecoration(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Lösenord',
                   ),
@@ -66,7 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, "/main");
+                      String username = usernameController.text;
+                      String password = passwordController.text;
+                      checkLogin(username, password);
                     },
                     style: ElevatedButton.styleFrom(
                     textStyle: const TextStyle(
@@ -99,6 +109,38 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  Future<void> checkLogin(String username, String password) async {
+    // Lägg till ditt inloggningslogik här, använd 'username' och 'password'.
+    // Exempelvis, använd ditt UsersDatabase för att kontrollera om användaren är giltig.
+    bool isLoggedIn = await UsersDatabase.instance.checkLogin(username, password);
+
+    if (isLoggedIn) {
+      // Användaren är inloggad, navigera till huvudskärmen eller gör något annat.
+      Navigator.pushReplacementNamed(context, "/main");
+    } else {
+      // Inloggningen misslyckades, visa ett meddelande eller utför en annan åtgärd.
+      // Här kan du visa en felaktig inloggningsvarning.
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Inloggning misslyckades"),
+            content: Text("Felaktigt användarnamn eller lösenord."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Stäng"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
 }
 
 

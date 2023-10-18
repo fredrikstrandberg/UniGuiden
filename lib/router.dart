@@ -14,7 +14,7 @@ import '/pages/universities_page/university.dart';
 void main() => runApp(MaterialApp(
     initialRoute: '/login',
     routes: {
-          '/main': (context) => const MainScreen(),
+          '/main': (context) => MainScreen(),
           '/login': (context) => const LoginScreen(),
           '/home': (context) => const HomePage(),
           '/message': (context) => const MessagePage(),
