@@ -8,27 +8,22 @@ import '/pages/universities_page/universities_page.dart';
 import 'DB/users_database.dart';
 import 'app_bar.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Se till att Flutter-ramverket är initialiserat.
-  final db = await UsersDatabase.instance.database;
-  runApp(MyApp(db: db));
-}
+
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  final Database db;
-
-  MyApp({Key? key, required this.db}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MainScreen(),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key? key});
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -38,13 +33,14 @@ class _MainScreenState extends State<MainScreen> {
   int curIndex = 0;
 
   List<Widget> widgetOptions = <Widget>[
-    HomePage(),
-    StudentsPage(),
-    UniversitiesPage(),
-    MessagePage(),
-    ProfilePage(),
+    const HomePage(),
+    const StudentsPage(),
+    const UniversitiesPage(),
+    const MessagePage(),
+    const ProfilePage(),
   ];
 
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
