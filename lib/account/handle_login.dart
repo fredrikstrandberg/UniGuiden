@@ -1,0 +1,69 @@
+import 'dart:typed_data';
+import 'package:flutter/material.dart';
+import 'package:untitled/pages/pop_up.dart';
+import 'account.dart';
+import 'account_list.dart';
+import 'package:email_validator/email_validator.dart';
+
+
+HandleLogin(context, email, password) {
+
+  bool validEmail = EmailValidator.validate(email);
+  bool passInput = password.toString().isNotEmpty;
+
+  if (!validEmail || !passInput) {
+    if (!validEmail) {
+      return HandleLoginError(context, "Fyll i en giltig email");
+    }
+    else {
+      return HandleLoginError(context, "Fyll i lösenord");
+    }
+  }
+
+  // om ifyllda
+  else {
+    // kolla att email registrerad
+    if (accountMap[email] == null) {
+      return HandleLoginError(context, "Email är inte registrerad");
+    }
+    // om registrered
+    else {
+      // kolla att lösenord stämmer
+      if (accountMap[email] == password) {
+        Navigator.pushReplacementNamed(context, "/main");
+      }
+      else {
+        return HandleLoginError(context, "Felaktigt lösenord");
+      }
+    }
+  }
+}
+
+HandleLoginError(context, errorString) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) =>
+    AlertDialog(
+      title: Text(
+          errorString,
+      ),
+      titleTextStyle: const TextStyle(
+        letterSpacing: 1,
+        fontFamily: "YoungSerif",
+        fontSize: 15,
+        color: Colors.black,
+      ),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              "Ok",
+              style: TextStyle(
+              fontFamily: "YoungSerif"
+              ),
+            ),
+        )
+      ],
+    ),
+  );
+}
