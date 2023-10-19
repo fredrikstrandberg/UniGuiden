@@ -44,7 +44,7 @@ handleLogin(context, email, password) async {
   // }
   else {
     // kolla att email registrerad
-    if (!await okEmail(email)){
+    if (!await emailExists(email)){
       print("email ej registrerad");
       return handleLoginError(context, "Email är inte registrerad");
     }
@@ -62,9 +62,9 @@ handleLogin(context, email, password) async {
   }
 }
 
-Future <bool> okEmail(email) async {
+Future <bool> emailExists(email) async {
   print("inside okUser");
-  return await AccountDatabase.instance.okEmail(email);
+  return await AccountDatabase.instance.emailExists(email);
 }
 
 Future <bool> correctLogin(email, password) async{

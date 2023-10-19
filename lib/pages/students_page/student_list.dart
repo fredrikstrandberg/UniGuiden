@@ -1,4 +1,4 @@
-import 'student.dart';
+import '../../model/student.dart';
 
 final List<Student> students = [
   Student(

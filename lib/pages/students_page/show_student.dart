@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../pop_up.dart';
-import 'student.dart';
+import '../../model/student.dart';
 import '/app_bar.dart';
 
 

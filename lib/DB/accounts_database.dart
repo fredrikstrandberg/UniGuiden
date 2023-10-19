@@ -77,7 +77,7 @@ class AccountDatabase {
     return result.isNotEmpty; // Return true if there's a matching user.
   }
 
-  Future<bool> okEmail(String email) async {
+  Future<bool> emailExists(String email) async {
     print("inside checkEmail");
     final db = await instance.database;
     print("db hämtad");

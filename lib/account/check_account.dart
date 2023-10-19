@@ -12,6 +12,8 @@ CheckAccount(context, email, password, repeatPassword) async {
   List regEmails = accountMap.keys.toList();
   // bool passLengthCheck = (password.toString().length >= 8);
 
+  print("inne i check account");
+
   if (!validEmail || !passInput || !repeatPassInput) {
     if (!validEmail) {
       return handleLoginError(context, "Fyll i en giltig email");
@@ -36,9 +38,9 @@ CheckAccount(context, email, password, repeatPassword) async {
     //   return true;
     // }
 
-    if (!await okEmail(email)){
-      print("email ej registrerad");
-      return handleLoginError(context, "Email är inte registrerad");
+    if (await emailExists(email)){
+      print("email registrerad i checkaccount");
+      return handleLoginError(context, "Email är tyvärr redan registrerad");
     }
     else if (password != repeatPassword) {
       return handleLoginError(context, "Lösenorden stämmer inte överens");
@@ -50,7 +52,7 @@ CheckAccount(context, email, password, repeatPassword) async {
 }
 
 
-Future <bool> okEmail(email) async {
+Future <bool> emailExists(email) async {
   print("inside okEmail");
-  return await AccountDatabase.instance.okEmail(email);
+  return await AccountDatabase.instance.emailExists(email);
 }
