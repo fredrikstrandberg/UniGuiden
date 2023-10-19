@@ -1,17 +1,15 @@
-import 'account.dart';
+import '../model/account.dart';
 
 final List<Account> accountList = [
   Account(
     email: "admin@admin.se",
-    password: "admin",
     name: "admin",
-    birthdate: "X"
+    birthdate: "X", password: '123'
   ),
   Account(
       email: "f@s.se",
-      password: "pass",
       name: "Fredrik Strandberg",
-      birthdate: "1999-12-27"
+      birthdate: "1999-12-27", password: '123'
   ),
 ];
 

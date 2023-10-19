@@ -15,7 +15,7 @@ void main() => runApp(MaterialApp(
     initialRoute: '/login',
     routes: {
           '/main': (context) => const MainScreen(),
-          '/login': (context) => LoginScreen(),
+          '/login': (context) => const LoginScreen(),
           '/home': (context) => const HomePage(),
           '/message': (context) => const MessagePage(),
           '/profile': (context) => const ProfilePage(),

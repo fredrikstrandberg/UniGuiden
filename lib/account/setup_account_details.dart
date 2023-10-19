@@ -4,7 +4,7 @@ import 'package:untitled/account/create_account.dart';
 import 'package:untitled/account/select_account_type.dart';
 import 'package:untitled/pages/page_identifier.dart';
 import '/app_bar.dart';
-import 'account.dart';
+import '../model/account.dart';
 import 'check_account.dart';
 import 'account_list.dart';
 
@@ -62,7 +62,7 @@ class SetupAccountDetails extends StatelessWidget {
                         const SizedBox(height: 10),
                         ElevatedButton(
                             onPressed: () {
-                              CreateAccount(
+                              createAccount(
                                 context,
                                 email,
                                 password,

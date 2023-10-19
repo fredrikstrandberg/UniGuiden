@@ -5,7 +5,6 @@ import '/pages/message_page/messages_page.dart';
 import '/pages/profile_page/profile_page.dart';
 import '/pages/students_page/students_page.dart';
 import '/pages/universities_page/universities_page.dart';
-import 'DB/users_database.dart';
 import 'app_bar.dart';
 import 'global_variables.dart' as globals;
 
@@ -41,7 +40,6 @@ class _MainScreenState extends State<MainScreen> {
     const ProfilePage(),
   ];
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(

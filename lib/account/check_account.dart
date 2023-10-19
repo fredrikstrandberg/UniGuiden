@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:untitled/DB/accounts_database.dart';
 import 'account_list.dart';
 import 'handle_login.dart';
 
 
-CheckAccount(context, email, password, repeatPassword) {
+CheckAccount(context, email, password, repeatPassword) async {
   bool validEmail = EmailValidator.validate(email);
   bool passInput = password.toString().isNotEmpty;
   bool repeatPassInput = repeatPassword.toString().isNotEmpty;
@@ -13,26 +14,43 @@ CheckAccount(context, email, password, repeatPassword) {
 
   if (!validEmail || !passInput || !repeatPassInput) {
     if (!validEmail) {
-      return HandleLoginError(context, "Fyll i en giltig email");
+      return handleLoginError(context, "Fyll i en giltig email");
     }
     else {
       if (!passInput) {
-        return HandleLoginError(context, "Fyll i lösenord");
+        return handleLoginError(context, "Fyll i lösenord");
       }
       else {
-        return HandleLoginError(context, "Upprepa lösenord");
+        return handleLoginError(context, "Upprepa lösenord");
       }
     }
   }
   else {
-    if (regEmails.contains(email)) {
-      return HandleLoginError(context, "Email är redan registrerad");
+    // if (regEmails.contains(email)) {
+    //   return handleLoginError(context, "Email är redan registrerad");
+    // }
+    // else if (password != repeatPassword) {
+    //   return handleLoginError(context, "Lösenorden stämmer inte överens");
+    // }
+    // else {
+    //   return true;
+    // }
+
+    if (!await okEmail(email)){
+      print("email ej registrerad");
+      return handleLoginError(context, "Email är inte registrerad");
     }
     else if (password != repeatPassword) {
-      return HandleLoginError(context, "Lösenorden stämmer inte överens");
+      return handleLoginError(context, "Lösenorden stämmer inte överens");
     }
     else {
       return true;
     }
   }
+}
+
+
+Future <bool> okEmail(email) async {
+  print("inside okEmail");
+  return await AccountDatabase.instance.okEmail(email);
 }

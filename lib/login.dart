@@ -75,7 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      HandleLogin(context, emailController.text, passwordController.text);
+                      print("button clicked");
+                      handleLogin(context, emailController.text, passwordController.text);
                     },
                     style: ElevatedButton.styleFrom(
                     textStyle: const TextStyle(

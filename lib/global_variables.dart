@@ -1,4 +1,4 @@
-import 'account/account.dart';
+import 'model/account.dart';
 import 'account/account_list.dart';
 
 // globala variabler funkar i prototypen men borde inte användas
