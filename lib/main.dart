@@ -7,6 +7,7 @@ import '/pages/students_page/students_page.dart';
 import '/pages/universities_page/universities_page.dart';
 import 'DB/users_database.dart';
 import 'app_bar.dart';
+import 'global_variables.dart' as globals;
 
 
 void main() => runApp(const MyApp());

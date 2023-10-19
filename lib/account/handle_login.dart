@@ -1,13 +1,16 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:untitled/global_variables.dart';
 import 'package:untitled/pages/pop_up.dart';
 import 'account.dart';
 import 'account_list.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:untitled/global_variables.dart';
 
 
 HandleLogin(context, email, password) {
 
+  email = email.toLowerCase();
   bool validEmail = EmailValidator.validate(email);
   bool passInput = password.toString().isNotEmpty;
 
@@ -30,6 +33,7 @@ HandleLogin(context, email, password) {
     else {
       // kolla att lösenord stämmer
       if (accountMap[email] == password) {
+        GlobalVariables.curLoggedIn = accountList[accountList.indexWhere((account) => account.email == email)];
         Navigator.pushReplacementNamed(context, "/main");
       }
       else {

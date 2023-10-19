@@ -32,7 +32,7 @@ class ShowUniversity extends StatelessWidget {
                             acceptText: "Lägg till")
                     );
                   },
-                  icon: const Icon(Icons.add_circle_outline),
+                  icon: const Icon(Icons.add_home_rounded),
                 )
               ],
             ),
