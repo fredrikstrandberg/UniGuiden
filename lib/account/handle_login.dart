@@ -10,6 +10,7 @@ import 'package:untitled/global_variables.dart';
 
 HandleLogin(context, email, password) {
 
+  email = email.toLowerCase();
   bool validEmail = EmailValidator.validate(email);
   bool passInput = password.toString().isNotEmpty;
 

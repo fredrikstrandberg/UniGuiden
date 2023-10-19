@@ -4,8 +4,9 @@ import 'account.dart';
 import 'account_list.dart';
 
 
-CreateAccount(context, email, password, name, birthdate) {
+CreateAccount(context, String email, password, name, birthdate) {
 
+  email = email.toLowerCase();
 
   accountMap[email] = password;
   accountList.add(
