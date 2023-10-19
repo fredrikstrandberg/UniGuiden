@@ -34,7 +34,7 @@ HandleLogin(context, email, password) {
       // kolla att lösenord stämmer
       if (accountMap[email] == password) {
         GlobalVariables.curLoggedIn = accountList[accountList.indexWhere((account) => account.email == email)];
-        Navigator.pushReplacementNamed(context, "/main");
+        Navigator.of(context).pushNamedAndRemoveUntil('/main', (Route<dynamic> route) => false);
       }
       else {
         return HandleLoginError(context, "Felaktigt lösenord");
