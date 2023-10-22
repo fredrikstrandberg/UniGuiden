@@ -69,7 +69,7 @@ class StudentCard extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   child: SizedBox(
                       child: ClipOval(
-                        child: Image.asset("images/${student.imageName}",
+                        child: Image.asset("images/${student.image}",
                         ),
                       )
                   )

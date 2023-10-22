@@ -42,7 +42,8 @@ class ShowStudent extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 100,
-                    backgroundImage:AssetImage("images/${student.imageName}"),
+                    //backgroundImage:AssetImage("images/${student.imageName}"),
+                    //backgroundImage:AssetImage("images/${student.imageName}"),
                     backgroundColor: Colors.transparent,
                   ),
                   const SizedBox(height: 10),

@@ -8,6 +8,9 @@ import '../model/account.dart';
 import 'account_list.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:untitled/global_variables.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 
 handleLogin(context, email, password) async {
@@ -49,7 +52,7 @@ handleLogin(context, email, password) async {
       return handleLoginError(context, "Email är inte registrerad");
     }
 
-    if (await correctLogin(email, password)) {
+    if (await authenticateUser(email, password)) {
       print("correct");
 
       Navigator.pushReplacementNamed(context, "/main");
@@ -72,6 +75,38 @@ Future <bool> correctLogin(email, password) async{
 
   return await AccountDatabase.instance.correctLogin(email, password);
 }
+Future<bool> authenticateUser(String email, String password) async {
+  final url = Uri.parse('http://localhost:3000/login'); // Byt ut detta med din serverens URL.
+
+  try {
+    final response = await http.post(
+      url,
+      body: json.encode({'email': email, 'password': password}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // Inloggning lyckades
+      print('Inloggning lyckades');
+      return false;
+    } else {
+      // Inloggning misslyckades
+      print('Inloggning misslyckades');
+      return true;
+    }
+  } catch (error) {
+    // Något gick fel
+    print('Något gick fel: $error');
+    return false;
+
+  }
+}
+
+
+
+
 
 handleLoginError(context, errorString) {
   showDialog(

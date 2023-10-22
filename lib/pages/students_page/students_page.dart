@@ -37,24 +37,24 @@ class StudentsPage extends StatelessWidget {
 
               ],
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children:
-                    students.map((student)
-                        => GestureDetector(
-                        child: StudentCard(student: student),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ShowStudent(student: student),
-                      ),
-                    );
-                  },
-                )
-                ).toList()),
-              ),
-            ),
+            // Expanded(
+            //   child: SingleChildScrollView(
+            //     child: Column(
+            //       children:
+            //         students.map((student)
+            //            => GestureDetector(
+            //            child: StudentCard(student: student),
+            //       onTap: () {
+            //         Navigator.of(context).push(
+            //           MaterialPageRoute(
+            //             builder: (context) => ShowStudent(student: student),
+            //           ),
+            //         );
+            //       },
+            //     )
+            //     ).toList()),
+            //   ),
+            //),
           ],
         ),
       ),
