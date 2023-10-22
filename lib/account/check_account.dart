@@ -13,23 +13,23 @@ CheckAccount(context, email, password, repeatPassword) {
 
   if (!validEmail || !passInput || !repeatPassInput) {
     if (!validEmail) {
-      return HandleLoginError(context, "Fyll i en giltig email");
+      return handleLoginError(context, "Fyll i en giltig email");
     }
     else {
       if (!passInput) {
-        return HandleLoginError(context, "Fyll i lösenord");
+        return handleLoginError(context, "Fyll i lösenord");
       }
       else {
-        return HandleLoginError(context, "Upprepa lösenord");
+        return handleLoginError(context, "Upprepa lösenord");
       }
     }
   }
   else {
     if (regEmails.contains(email)) {
-      return HandleLoginError(context, "Email är redan registrerad");
+      return handleLoginError(context, "Email är redan registrerad");
     }
     else if (password != repeatPassword) {
-      return HandleLoginError(context, "Lösenorden stämmer inte överens");
+      return handleLoginError(context, "Lösenorden stämmer inte överens");
     }
     else {
       return true;

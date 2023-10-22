@@ -6,9 +6,11 @@ import 'account.dart';
 import 'account_list.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:untitled/global_variables.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 
-HandleLogin(context, email, password) {
+handleLogin(context, email, password) async {
 
   email = email.toLowerCase();
   bool validEmail = EmailValidator.validate(email);
@@ -16,34 +18,82 @@ HandleLogin(context, email, password) {
 
   if (!validEmail || !passInput) {
     if (!validEmail) {
-      return HandleLoginError(context, "Fyll i en giltig email");
+      return handleLoginError(context, "Fyll i en giltig email");
     }
     else {
-      return HandleLoginError(context, "Fyll i lösenord");
+      return handleLoginError(context, "Fyll i lösenord");
     }
   }
 
   // om ifyllda
+  // else {
+  //   // kolla att email registrerad
+  //   if (accountMap[email] == null) {
+  //     return HandleLoginError(context, "Email är inte registrerad");
+  //   }
+  //   // om registrered
+  //   else {
+  //     // kolla att lösenord stämmer
+  //     if (accountMap[email] == password) {
+  //       Navigator.pushReplacementNamed(context, "/main");
+  //     }
+  //     else {
+  //       return HandleLoginError(context, "Felaktigt lösenord");
+  //     }
+  //   }
+  // }
   else {
     // kolla att email registrerad
-    if (accountMap[email] == null) {
-      return HandleLoginError(context, "Email är inte registrerad");
+    // if (!await emailExists(email)){
+    //   print("email ej registrerad");
+    //   return handleLoginError(context, "Email är inte registrerad");
+    // }
+
+    if (await authenticateUser(email, password)) {
+      print("correct");
+
+      Navigator.pushReplacementNamed(context, "/main");
     }
-    // om registrered
-    else {
-      // kolla att lösenord stämmer
-      if (accountMap[email] == password) {
-        GlobalVariables.curLoggedIn = accountList[accountList.indexWhere((account) => account.email == email)];
-        Navigator.of(context).pushNamedAndRemoveUntil('/main', (Route<dynamic> route) => false);
-      }
-      else {
-        return HandleLoginError(context, "Felaktigt lösenord");
-      }
+    else{
+      print("incorrect");
+
+      return handleLoginError(context, "Felaktigt lösenord");
     }
   }
 }
 
-HandleLoginError(context, errorString) {
+Future<bool> authenticateUser(String email, String password) async {
+  final url = Uri.parse('http://localhost:3000/login'); // Byt ut detta med din serverens URL.
+
+  try {
+    final response = await http.post(
+      url,
+      body: json.encode({'email': email, 'password': password}),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // Inloggning lyckades
+      print('Inloggning lyckades');
+      return false;
+    } else {
+      // Inloggning misslyckades
+      print('Inloggning misslyckades');
+      return true;
+    }
+  } catch (error) {
+    // Något gick fel
+    print('Något gick fel: $error');
+    return false;
+
+  }
+}
+
+
+
+handleLoginError(context, errorString) {
   showDialog(
     context: context,
     builder: (BuildContext context) =>

@@ -17,7 +17,7 @@ CreateAccount(context, String email, password, name, birthdate) {
         birthdate: birthdate,
       )
   );
-  HandleLogin(context, email, password);
+  handleLogin(context, email, password);
 
   // Navigator.pushNamedAndRemoveUntil(context, "/main", (Route<dynamic> route) => false);
 }
