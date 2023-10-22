@@ -62,7 +62,7 @@ class SetupAccountDetails extends StatelessWidget {
                         const SizedBox(height: 10),
                         ElevatedButton(
                             onPressed: () {
-                              CreateAccount(
+                              createAccount(
                                 context,
                                 email,
                                 password,

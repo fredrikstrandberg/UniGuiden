@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'account_list.dart';
 import 'handle_login.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 
 CheckAccount(context, email, password, repeatPassword) {
