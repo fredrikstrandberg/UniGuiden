@@ -19,91 +19,118 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue[900],
-        centerTitle: true,
-        title: const Text("UniGuiden"),
-        titleTextStyle: const TextStyle(
-            fontFamily: "YoungSerif",
-            fontSize: 20,
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Center(
-            child: Column(
-              children: [
-                Image.asset("images/login.png", width: 300),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: emailController,
-                  autocorrect: false,
-                  decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Email',
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Lösenord',
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const KeepLoggedIn(),
-                    const Text("Håll mig inloggad"),
-                    const Spacer(),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const ForgotPasswordPage(),
-                            ),
-                          );
-                        },
-                        child: const Text("Glömt lösenord")),
-                  ],
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      HandleLogin(context, emailController.text, passwordController.text);
-                    },
-                    style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: "YoungSerif"),
-                        backgroundColor: Colors.blue[900]),
-                    child: const Text("Logga in")
-                ),
-                const SizedBox(height: 0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Har du inget konto?"),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => SelectAccountType(),
-                            ),
-                          );
-                        },
-                        child: const Text("Skapa konto")
-                    ),
-                  ],
-                )
+      // appBar: AppBar(
+      //   backgroundColor: Colors.blue[900],
+      //   centerTitle: true,
+      //   title: const Text("UniGuiden"),
+      //   titleTextStyle: const TextStyle(
+      //       fontFamily: "YoungSerif",
+      //       fontSize: 20,
+      //   ),
+      // ),
+      body: Container(
+
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.lightBlueAccent,
+                Colors.deepOrange,
               ],
+            )
+        ),
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Center(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 100),
+                      Image.asset("images/login.png", width: 300),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "UniGuiden",
+                        style: TextStyle(
+                          fontFamily: "YoungSerif",
+                          color: Colors.white,
+                          fontSize: 35,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: emailController,
+                        autocorrect: false,
+                        decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Email',
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TextField(
+                        controller: passwordController,
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Lösenord',
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const KeepLoggedIn(),
+                          const Text("Håll mig inloggad"),
+                          const Spacer(),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => const ForgotPasswordPage(),
+                                  ),
+                                );
+                              },
+                              child: const Text("Glömt lösenord")),
+                        ],
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            HandleLogin(context, emailController.text, passwordController.text);
+                          },
+                          style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(
+                              fontSize: 20,
+                              fontFamily: "YoungSerif"),
+                              backgroundColor: Colors.blue[900]),
+                          child: const Text("Logga in")
+                      ),
+                      const SizedBox(height: 0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Har du inget konto?"),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => SelectAccountType(),
+                                  ),
+                                );
+                              },
+                              child: const Text("Skapa konto")
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

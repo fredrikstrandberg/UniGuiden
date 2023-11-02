@@ -35,5 +35,25 @@ final List<Post> posts = [
       imageName: "profile.png",
       saved: false,
   ),
+  Post(
+    university: "Test",
+    title: "Test",
+    date: "Datum",
+    place: "Plats",
+    description:
+    "Beskrivning",
+    imageName: "profile.png",
+    saved: false,
+  ),
+  Post(
+    university: "Test",
+    title: "Test",
+    date: "Datum",
+    place: "Plats",
+    description:
+    "Beskrivning",
+    imageName: "profile.png",
+    saved: false,
+  ),
 
 ];

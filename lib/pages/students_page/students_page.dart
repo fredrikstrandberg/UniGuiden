@@ -13,7 +13,7 @@ class StudentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.fromLTRB(10,0,10,0),
         child: Column(
           children: [
             Row(

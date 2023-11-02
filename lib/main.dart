@@ -42,8 +42,12 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      //extendBody: true,
       appBar: const CustomAppBar(),
       bottomNavigationBar: BottomNavigationBar(
+        //backgroundColor: Colors.transparent,
+        //elevation: 0,
         currentIndex: curIndex,
         selectedItemColor: Colors.blue[900],
         showSelectedLabels: false,
@@ -81,7 +85,20 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
       ),
-      body: widgetOptions.elementAt(curIndex),
+      body: Container(
+          padding: const EdgeInsets.fromLTRB(0, 120, 0, 5),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.lightBlueAccent,
+                  Colors.deepOrange,
+                ],
+              )
+          ),
+          child: widgetOptions.elementAt(curIndex)
+      ),
     );
   }
 }

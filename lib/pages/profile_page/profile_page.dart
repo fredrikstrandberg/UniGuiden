@@ -3,6 +3,7 @@ import 'package:untitled/pages/profile_page/edit_profile_page.dart';
 import '../../account/account_list.dart';
 import '../../global_variables.dart';
 import '/pages/page_identifier.dart';
+import 'calculate_age.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -64,7 +65,7 @@ class ProfilePage extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[300],
+                      color: Colors.white.withOpacity(0.6),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,7 +155,7 @@ class ProfilePage extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[300],
+                      color: Colors.white.withOpacity(0.6),
                     ),
                     child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -166,6 +167,16 @@ class ProfilePage extends StatelessWidget {
                             fontSize: 20,
                           ),
                         ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Fyll i info om dig här!",
+                          style: TextStyle(
+                            fontFamily: "YoungSerif",
+                            fontSize: 12,
+                            color: Colors.black54
+                          ),
+                        ),
+                        SizedBox(height: 10),
                       ],
                     ),
 
@@ -179,22 +190,4 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
-}
-
-calculateAge(birthdate) {
-  DateTime currentDate = DateTime.now();
-  DateTime birthDateFormatted = DateTime.parse(birthdate);
-  int age = currentDate.year - birthDateFormatted.year;
-  int month1 = currentDate.month;
-  int month2 = birthDateFormatted.month;
-  if (month2 > month1) {
-    age--;
-  } else if (month1 == month2) {
-    int day1 = currentDate.day;
-    int day2 = birthDateFormatted.day;
-    if (day2 > day1) {
-      age--;
-    }
-  }
-  return age;
 }
