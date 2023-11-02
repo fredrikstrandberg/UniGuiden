@@ -65,7 +65,7 @@ class editProfilePage extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 5),
                                     TextField(
-                                      decoration: InputDecoration(constraints: BoxConstraints(maxWidth: 150, maxHeight: 10)),
+                                      decoration: const InputDecoration(constraints: BoxConstraints(maxWidth: 150, maxHeight: 10)),
                                       controller: highschoolController,
                                       style: const TextStyle(
                                         fontFamily: "YoungSerif",
@@ -82,7 +82,9 @@ class editProfilePage extends StatelessWidget {
                                         Icons.my_library_books_rounded
                                     ),
                                     const SizedBox(width: 5),
-                                    Text(GlobalVariables.curLoggedIn.education,
+                                    TextField(
+                                      decoration: const InputDecoration(constraints: BoxConstraints(maxWidth: 150, maxHeight: 10)),
+                                      controller: educationController,
                                       style: const TextStyle(
                                         fontFamily: "YoungSerif",
                                         fontSize: 14,
@@ -104,7 +106,9 @@ class editProfilePage extends StatelessWidget {
                                         Icons.location_city
                                     ),
                                     const SizedBox(width: 5),
-                                    Text(GlobalVariables.curLoggedIn.city,
+                                    TextField(
+                                      decoration: const InputDecoration(constraints: BoxConstraints(maxWidth: 150, maxHeight: 10)),
+                                      controller: cityController,
                                       style: const TextStyle(
                                         fontFamily: "YoungSerif",
                                         fontSize: 15,
@@ -114,13 +118,15 @@ class editProfilePage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 10),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     const Icon(
                                         Icons.person_sharp
                                     ),
                                     const SizedBox(width: 5),
-                                    Text(
-                                      GlobalVariables.curLoggedIn.birthdate,
+                                    TextField(
+                                      decoration: const InputDecoration(constraints: BoxConstraints(maxWidth: 150, maxHeight: 10)),
+                                      controller: birthdateController,
                                       style: const TextStyle(
                                         fontFamily: "YoungSerif",
                                         fontSize: 14,
