@@ -6,6 +6,7 @@ class Post {
   String date;
   String description;
   String imageName;
+  bool saved;
 
   Post({
     required this.university,
@@ -14,6 +15,7 @@ class Post {
     required this.date,
     required this.description,
     required this.imageName,
+    required this.saved,
   });
 
 }

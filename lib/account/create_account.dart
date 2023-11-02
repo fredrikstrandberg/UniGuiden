@@ -4,7 +4,7 @@ import 'account.dart';
 import 'account_list.dart';
 
 
-CreateAccount(context, String email, password, name, birthdate) {
+CreateAccount(context, String email, password, name, birthdate, highschool, education, city) {
 
   email = email.toLowerCase();
 
@@ -15,6 +15,9 @@ CreateAccount(context, String email, password, name, birthdate) {
         password: password,
         name: name,
         birthdate: birthdate,
+        highschool: highschool,
+        education: education,
+        city: city
       )
   );
   HandleLogin(context, email, password);

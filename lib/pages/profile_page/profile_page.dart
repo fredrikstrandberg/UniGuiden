@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/pages/profile_page/edit_profile_page.dart';
 import '../../account/account_list.dart';
 import '../../global_variables.dart';
 import '/pages/page_identifier.dart';
@@ -20,13 +21,17 @@ class ProfilePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const SizedBox(width: 50),
-                      const PageIdentifier("Studenter"),
+                      const PageIdentifier("Profil"),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           IconButton(
                             onPressed: () {
-                              Navigator.pushReplacementNamed(context, "/login");
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => editProfilePage(),
+                                ),
+                              );
                             },
                             icon: const Icon(Icons.settings),
                           ),
@@ -55,29 +60,141 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text("Vänster"),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text("Höger"),
-                        ],
-                      )
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey[300],
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                const Icon(
+                                    Icons.school
+                                ),
+                                const SizedBox(width: 5),
+                                Text(GlobalVariables.curLoggedIn.highschool,
+                                  style: const TextStyle(
+                                    fontFamily: "YoungSerif",
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                const Icon(
+                                    Icons.my_library_books_rounded
+                                ),
+                                const SizedBox(width: 5),
+                                Text(GlobalVariables.curLoggedIn.education,
+                                  style: const TextStyle(
+                                    fontFamily: "YoungSerif",
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                          ],
+                        ),
+                        const Flexible(child: SizedBox(width: 100)),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                const Icon(
+                                    Icons.location_city
+                                ),
+                                const SizedBox(width: 5),
+                                Text(GlobalVariables.curLoggedIn.city,
+                                  style: const TextStyle(
+                                    fontFamily: "YoungSerif",
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                const Icon(
+                                    Icons.person_sharp
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  "${calculateAge(
+                                      GlobalVariables.curLoggedIn.birthdate
+                                  )} år",
+                                  style: const TextStyle(
+                                    fontFamily: "YoungSerif",
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
 
-                    ],
-                  )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey[300],
+                    ),
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Info om mig",
+                          style: TextStyle(
+                            fontFamily: "YoungSerif",
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
 
+                  ),
                 ],
               ),
             ),
+
           ],
         ),
       ),
     );
   }
+}
+
+calculateAge(birthdate) {
+  DateTime currentDate = DateTime.now();
+  DateTime birthDateFormatted = DateTime.parse(birthdate);
+  int age = currentDate.year - birthDateFormatted.year;
+  int month1 = currentDate.month;
+  int month2 = birthDateFormatted.month;
+  if (month2 > month1) {
+    age--;
+  } else if (month1 == month2) {
+    int day1 = currentDate.day;
+    int day2 = birthDateFormatted.day;
+    if (day2 > day1) {
+      age--;
+    }
+  }
+  return age;
 }

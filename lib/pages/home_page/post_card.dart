@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/global_variables.dart';
+import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import 'post.dart';
 
 
 class UniversityPost extends StatelessWidget {
 
   final Post post;
-  const UniversityPost({super.key, required this.post });
+  const UniversityPost({ super.key, required this.post });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,8 @@ class UniversityPost extends StatelessWidget {
                       fontFamily: "YoungSerif",
                     ),
                   ),
-                  const SavedPost(),
+                  const Flexible(child: SizedBox(width: 1000)),
+                  SavedPost(savedPost: post),
                   CircleAvatar(
                       radius: 25,
                       backgroundImage: AssetImage("images/${post.imageName}"),
@@ -73,7 +76,9 @@ class UniversityPost extends StatelessWidget {
 
 
 class SavedPost extends StatefulWidget {
-  const SavedPost({super.key});
+  final Post savedPost;
+  const SavedPost({super.key, required this.savedPost});
+
 
   @override
   State<SavedPost> createState() => _SavedPostState();
@@ -84,6 +89,10 @@ class _SavedPostState extends State<SavedPost> {
 
   @override
   Widget build(BuildContext context) {
+    Post savedPost = widget.savedPost;
+    if(savedPost.saved){
+      markColor = Colors.black;
+    }
 
     return IconButton(
       icon: const Icon(Icons.bookmark),
@@ -93,11 +102,15 @@ class _SavedPostState extends State<SavedPost> {
           setState(() {
             markColor = Colors.black;
           });
+          savedPost.saved = true;
+          accountSavedPosts[GlobalVariables.curLoggedIn.email]?.add(savedPost);
         }
         else {
           setState(() {
             markColor = Colors.grey;
           });
+          savedPost.saved = false;
+          accountSavedPosts[GlobalVariables.curLoggedIn.email]?.remove(savedPost);
         }
 
       },

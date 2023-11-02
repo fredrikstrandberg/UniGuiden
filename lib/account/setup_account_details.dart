@@ -17,6 +17,9 @@ class SetupAccountDetails extends StatelessWidget {
 
   final nameController = TextEditingController();
   final birthDateController = TextEditingController();
+  final highschoolController = TextEditingController();
+  final educationController = TextEditingController();
+  final cityController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +61,27 @@ class SetupAccountDetails extends StatelessWidget {
                             hintText: 'Födelsedatum (ÅÅÅÅ-MM-DD)',
                           ),
                         ),
+                        TextField(
+                          controller: highschoolController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Gymnasium',
+                          ),
+                        ),
+                        TextField(
+                          controller: educationController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Gymnasieutbildning',
+                          ),
+                        ),
+                        TextField(
+                          controller: cityController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Stad/Ort',
+                          ),
+                        ),
 
                         const SizedBox(height: 10),
                         ElevatedButton(
@@ -68,6 +92,9 @@ class SetupAccountDetails extends StatelessWidget {
                                 password,
                                 nameController.text,
                                 birthDateController.text,
+                                highschoolController.text,
+                                educationController.text,
+                                cityController.text
                               );
                             },
                             style: ElevatedButton.styleFrom(
