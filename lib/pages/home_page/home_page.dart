@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/pages/home_page/my_universities_posts.dart';
 import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import 'package:untitled/pages/home_page/show_saved_posts.dart';
 import '../../global_variables.dart';
@@ -15,6 +16,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List fetchedPosts = posts;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -24,8 +28,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: RefreshIndicator(
-                onRefresh: ()
-                async => await Future.delayed(const Duration(seconds: 2)),
+                onRefresh: () {
+                  setState(() {
+                    fetchedPosts = posts;
+                  });
+                  return Future.delayed(const Duration(seconds: 2));
+                },
+                //async => await Future.delayed(const Duration(seconds: 2)),
                 backgroundColor: Colors.blue[900],
                 color: Colors.white,
                 child: SingleChildScrollView(
@@ -35,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                       return Column(
                           children:
                           <Widget> [customPageIdentifier()] +
-                          posts.map((post) => UniversityPost(post: post)).toList(),
+                          fetchedPosts.map((post) => UniversityPost(post: post)).toList(),
                       );
                     }
                   ),
@@ -50,22 +59,63 @@ class _HomePageState extends State<HomePage> {
 
   customPageIdentifier() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const ShowSavedPosts(),
+        SizedBox(
+          width: 100,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const MyUniversitesPosts(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.school_outlined,
+                  size: 30,
+                ),
               ),
-            );
-          },
-          icon: const Icon(
-            Icons.bookmark,
-            size: 35,
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const ShowSavedPosts(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.bookmark_border,
+                  size: 30,
+                ),
+              ),
+            ],
           ),
         ),
-        const SizedBox(width: 117),
         const PageIdentifier("Flöde"),
+        SizedBox(
+          width: 100,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const ShowSavedPosts(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.filter_list,
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

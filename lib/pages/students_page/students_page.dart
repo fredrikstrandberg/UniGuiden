@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/pages/students_page/filter_popup.dart';
 import 'package:untitled/pages/students_page/show_student.dart';
 import '/pages/page_identifier.dart';
 import 'student_list.dart';
@@ -11,6 +12,9 @@ class StudentsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    TextEditingController searchInputController = TextEditingController();
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10,0,10,0),
@@ -25,12 +29,44 @@ class StudentsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                            const filterPopUp()
+                        );
+                      },
                       icon: const Icon(Icons.filter_list),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.search),
+                    PopupMenuButton<TextButton>(
+                      //offset: Offset(0,30),
+                      icon: const Icon(Icons.search_outlined),
+                      itemBuilder: (BuildContext context) {
+                        return [
+                          PopupMenuItem(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: TextField(
+                                      controller: searchInputController,
+                                      maxLines: 1,
+                                      cursorWidth: 200,
+                                      decoration: const InputDecoration(
+                                        hintText: "Sök här!"
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.search_outlined),
+                                    onPressed: () {
+
+                                    },
+                                  )
+                                ],
+                              )
+                          ),
+                        ];
+                      },
                     ),
                   ],
                 ),

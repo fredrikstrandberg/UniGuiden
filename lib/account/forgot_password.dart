@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/pages/pop_up.dart';
+import '../pages/students_page/pop_up_contact_student.dart';
 import '/app_bar.dart';
 
 class ForgotPasswordPage extends StatelessWidget {

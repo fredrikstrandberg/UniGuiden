@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:untitled/global_variables.dart';
-import 'package:untitled/pages/pop_up.dart';
+import 'package:untitled/pages/students_page/pop_up_contact_student.dart';
 import 'account.dart';
 import 'account_list.dart';
 import 'package:email_validator/email_validator.dart';

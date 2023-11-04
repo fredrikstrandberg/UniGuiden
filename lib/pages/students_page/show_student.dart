@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../pop_up.dart';
+import 'pop_up_contact_student.dart';
 import 'student.dart';
 import '/app_bar.dart';
 
@@ -40,7 +40,7 @@ class ShowStudent extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) =>
-                              PopUp(
+                              PopUpStudent(
                                   title: "Skicka kontaktförfrågan till ${student.name}",
                                   acceptText: "Skicka",
                                   demandMessage: true,

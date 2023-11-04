@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../pop_up.dart';
+import '../../global_variables.dart';
+import '../home_page/my_universities_list.dart';
+import 'pop_up_add_university.dart';
 import 'university.dart';
 import '/app_bar.dart';
 
@@ -33,22 +35,7 @@ class ShowUniversity extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButton(
-                    iconSize: 50,
-                    // color: Colors.blue[900],
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                          PopUp(
-                              title: "Lägg till ${university.name} bland dina universitet",
-                              acceptText: "Lägg till",
-                              demandMessage: false,
-                          )
-                      );
-                    },
-                    icon: const Icon(Icons.add_home_rounded),
-                  )
+                  CustomIconButton(universityName: university.name),
                 ],
               ),
               Padding(
@@ -93,6 +80,45 @@ class ShowUniversity extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+
+class CustomIconButton extends StatefulWidget {
+  final String universityName;
+
+  const CustomIconButton({Key? key, required this.universityName}) : super(key: key);
+
+  @override
+  _CustomIconButtonState createState() => _CustomIconButtonState();
+}
+
+class _CustomIconButtonState extends State<CustomIconButton> {
+
+  @override
+  Widget build(BuildContext context) {
+    bool isTrue = false;
+    if(accountSavedUniversities[GlobalVariables.curLoggedIn.email]!.
+    contains(widget.universityName)){
+      isTrue = true;
+    }
+
+    return IconButton(
+      iconSize: 50,
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                PopUpUniversity(
+                  university: widget.universityName,
+                  addTrue: !isTrue,
+                )
+        );
+      },
+      icon: isTrue
+          ? const Icon(Icons.remove_circle_outline) // Icon when isTrue is true
+          : const Icon(Icons.add_circle_outline), // Icon when isTrue is false
     );
   }
 }

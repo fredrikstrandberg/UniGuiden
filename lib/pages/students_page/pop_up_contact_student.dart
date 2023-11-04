@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/pages/home_page/my_universities_list.dart';
 
-class PopUp extends StatefulWidget {
-  const PopUp({super.key, required this.title, required this.acceptText, required this.demandMessage });
+import '../../global_variables.dart';
+
+class PopUpStudent extends StatefulWidget {
+  const PopUpStudent({super.key, required this.title, required this.acceptText, required this.demandMessage });
 
   final String title;
   final String acceptText;
@@ -9,10 +12,10 @@ class PopUp extends StatefulWidget {
 
 
   @override
-  State<PopUp> createState() => _PopUpState();
+  State<PopUpStudent> createState() => _PopUpStudentState();
 }
 
-class _PopUpState extends State<PopUp> {
+class _PopUpStudentState extends State<PopUpStudent> {
   Color hintColor = Colors.black54;
   TextEditingController messageController = TextEditingController();
 
@@ -41,6 +44,8 @@ class _PopUpState extends State<PopUp> {
         TextButton(
           onPressed: () {
             if (!widget.demandMessage){
+              accountSavedUniversities[GlobalVariables.curLoggedIn.email]?.
+              add("Kungliga Tekniska Högskolan");
               Navigator.pop(context);
             }
             else if (messageController.text.isNotEmpty) {

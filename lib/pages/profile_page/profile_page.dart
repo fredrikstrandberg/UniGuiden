@@ -26,15 +26,36 @@ class ProfilePage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => editProfilePage(),
-                                ),
-                              );
-                            },
+                          PopupMenuButton<TextButton>(
+                            //offset: Offset(0,30),
                             icon: const Icon(Icons.settings),
+                            itemBuilder: (BuildContext context) {
+                              return [
+                                PopupMenuItem(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => editProfilePage(),
+                                          ),
+                                        );
+                                      },
+                                      child: const Text("Redigera profil"),
+                                    )
+                                ),
+                                PopupMenuItem(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pushNamedAndRemoveUntil(
+                                            "/login", (route) => false
+                                        );
+                                      },
+                                      child: const Text("Logga ut"),
+                                    )
+                                ),
+                              ];
+                            },
+
                           ),
                         ],
                       ),
