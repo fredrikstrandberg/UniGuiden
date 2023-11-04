@@ -59,13 +59,14 @@ class SetupAccount extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     ElevatedButton(
-                        onPressed: () {
-                          if (CheckAccount(
+                        onPressed: () async {
+                          if (await CheckAccount(
                             context,
                             emailController.text,
                             passwordController.text,
                             repeatPasswordController.text,
-                          ) != null){
+                          ) == true){
+                            print("går vidare");
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => SetupAccountDetails(

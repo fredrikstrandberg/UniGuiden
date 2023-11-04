@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../pop_up.dart';
-import 'conversation.dart';
 import '/app_bar.dart';
 
 class ShowConversation extends StatelessWidget {

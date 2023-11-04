@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/account/create_account.dart';
-import 'package:untitled/account/select_account_type.dart';
 import 'package:untitled/pages/page_identifier.dart';
 import '/app_bar.dart';
-import 'account.dart';
-import 'check_account.dart';
-import 'account_list.dart';
 
 
 class SetupAccountDetails extends StatelessWidget {
@@ -61,21 +57,15 @@ class SetupAccountDetails extends StatelessWidget {
 
                         const SizedBox(height: 10),
                         ElevatedButton(
-                            onPressed: () {
-                              createAccount(
-                                context,
-                                email,
-                                password,
-                                nameController.text,
-                                birthDateController.text,
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                                textStyle: const TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: "YoungSerif"),
-                                backgroundColor: Colors.blue[900]),
-                            child: const Text("Skapa konto")
+                          onPressed: () async {
+
+                            await createAccountAndLogin(context, email, password, nameController.text, birthDateController.text);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 20, fontFamily: "YoungSerif"),
+                            backgroundColor: Colors.blue[900],
+                          ),
+                          child: const Text("Skapa konto"),
                         ),
                       ],
                     ),

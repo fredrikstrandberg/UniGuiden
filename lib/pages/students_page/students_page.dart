@@ -3,7 +3,6 @@ import 'package:untitled/pages/students_page/show_student.dart';
 import '/pages/page_identifier.dart';
 import 'student_list.dart';
 import 'student_card.dart';
-import 'package:filter_list/filter_list.dart';
 
 
 class StudentsPage extends StatelessWidget {

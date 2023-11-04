@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '/pages/pop_up.dart';
 import '/app_bar.dart';
 
 class ShowSavedPosts extends StatelessWidget {

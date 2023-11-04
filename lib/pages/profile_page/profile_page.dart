@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../account/account_list.dart';
 import '../../global_variables.dart';
 import '/pages/page_identifier.dart';
 

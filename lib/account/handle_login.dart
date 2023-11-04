@@ -1,13 +1,9 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:untitled/global_variables.dart';
-import 'package:untitled/pages/pop_up.dart';
-import 'account.dart';
-import 'account_list.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:untitled/global_variables.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:untitled/account/check_account.dart';
+
 
 
 handleLogin(context, email, password) async {
@@ -44,12 +40,12 @@ handleLogin(context, email, password) async {
   // }
   else {
     // kolla att email registrerad
-    // if (!await emailExists(email)){
-    //   print("email ej registrerad");
-    //   return handleLoginError(context, "Email är inte registrerad");
-    // }
+    if (!await checkEmailExist(email)){
+      print("email ej registrerad");
+      return handleLoginError(context, "Email är inte registrerad");
+    }
 
-    if (await authenticateUser(email, password)) {
+    else if (await authenticateUser(email, password)) {
       print("correct");
 
       Navigator.pushReplacementNamed(context, "/main");
@@ -63,8 +59,9 @@ handleLogin(context, email, password) async {
 }
 
 Future<bool> authenticateUser(String email, String password) async {
-  final url = Uri.parse('http://localhost:3000/login'); // Byt ut detta med din serverens URL.
-
+  final url = Uri.parse('http://10.0.2.2:3000/login'); // Byt ut detta med din serverens URL.
+  //final url = Uri.http("10.0.2.2:3000", "/login");
+  //final url = "http://localhost:3000/login";
   try {
     final response = await http.post(
       url,
@@ -75,13 +72,22 @@ Future<bool> authenticateUser(String email, String password) async {
     );
 
     if (response.statusCode == 200) {
-      // Inloggning lyckades
-      print('Inloggning lyckades');
-      return false;
+      final data = json.decode(response.body);
+      final success = data['success'];
+
+      if (success == true) {
+        // Inloggning lyckades
+        print('Inloggning lyckades');
+        return true;
+      } else {
+        // Inloggning misslyckades
+        print('Inloggning misslyckades, fel lösen');
+        return false;
+      }
     } else {
       // Inloggning misslyckades
       print('Inloggning misslyckades');
-      return true;
+      return false;
     }
   } catch (error) {
     // Något gick fel
@@ -120,4 +126,5 @@ handleLoginError(context, errorString) {
       ],
     ),
   );
+  return false;
 }

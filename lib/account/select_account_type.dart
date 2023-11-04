@@ -4,7 +4,6 @@ import 'package:untitled/pages/page_identifier.dart';
 import '/app_bar.dart';
 import 'account_type_card.dart';
 import 'account_types_list.dart';
-import 'handle_login.dart';
 
 
 class SelectAccountType extends StatelessWidget {
