@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/global_variables.dart';
-import 'package:untitled/pages/home_page/post_card.dart';
-import 'package:untitled/pages/home_page/post_list.dart';
-import 'package:untitled/pages/home_page/saved_posts_list.dart';
-import '../page_identifier.dart';
-import '/pages/pop_up.dart';
 import '/app_bar.dart';
 
 class ShowSavedPosts extends StatelessWidget {

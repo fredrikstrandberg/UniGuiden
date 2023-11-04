@@ -1,4 +1,4 @@
-class University {
+ class University {
 
   String name;
   String city;

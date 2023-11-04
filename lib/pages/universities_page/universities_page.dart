@@ -3,7 +3,6 @@ import 'package:untitled/pages/universities_page/show_university.dart';
 import '/pages/page_identifier.dart';
 import 'university_card.dart';
 import 'university_list.dart';
-import 'university.dart';
 
 class UniversitiesPage extends StatelessWidget {
   const UniversitiesPage({super.key});
