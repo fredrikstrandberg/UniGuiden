@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/profile_page/edit_profile_page.dart';
+import '../../account/account_list.dart';
 import '../../global_variables.dart';
 import '/pages/page_identifier.dart';
 import 'calculate_age.dart';
@@ -25,15 +26,36 @@ class ProfilePage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const editProfilePage(),
-                                ),
-                              );
-                            },
+                          PopupMenuButton<TextButton>(
+                            //offset: Offset(0,30),
                             icon: const Icon(Icons.settings),
+                            itemBuilder: (BuildContext context) {
+                              return [
+                                PopupMenuItem(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => editProfilePage(),
+                                          ),
+                                        );
+                                      },
+                                      child: const Text("Redigera profil"),
+                                    )
+                                ),
+                                PopupMenuItem(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pushNamedAndRemoveUntil(
+                                            "/login", (route) => false
+                                        );
+                                      },
+                                      child: const Text("Logga ut"),
+                                    )
+                                ),
+                              ];
+                            },
+
                           ),
                         ],
                       ),

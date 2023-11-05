@@ -48,17 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Center(
                   child: Column(
                     children: [
-                      const SizedBox(height: 100),
-                      Image.asset("images/login.png", width: 300),
-                      const SizedBox(height: 10),
-                      const Text(
-                        "UniGuiden",
-                        style: TextStyle(
-                          fontFamily: "YoungSerif",
-                          color: Colors.white,
-                          fontSize: 35,
-                        ),
-                      ),
+                      SizedBox(height: 100),
+                      Image.asset("images/uniGuiden3.png", width: 300),
+                      const SizedBox(height: 20),
+                      // const Text(
+                      //   "UniGuiden",
+                      //   style: TextStyle(
+                      //     fontFamily: "YoungSerif",
+                      //     color: Colors.white,
+                      //     fontSize: 35,
+                      //   ),
+                      // ),
                       const SizedBox(height: 20),
                       TextField(
                         controller: emailController,
