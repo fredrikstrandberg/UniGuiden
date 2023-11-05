@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/pages/home_page/my_universities_list.dart';
-
+import 'package:untitled/pages/students_page/student.dart';
 import '../../global_variables.dart';
+import '../message_page/request.dart';
+import '../message_page/sent_requests_list.dart';
 
 class PopUpStudent extends StatefulWidget {
-  const PopUpStudent({super.key, required this.title, required this.acceptText, required this.demandMessage });
+  const PopUpStudent({super.key, required this.title, required this.acceptText, required this.receiver });
 
   final String title;
   final String acceptText;
-  final bool demandMessage;
+  final Student receiver;
 
 
   @override
@@ -30,7 +31,7 @@ class _PopUpStudentState extends State<PopUpStudent> {
         fontSize: 15,
         color: Colors.black,
       ),
-      content: possibleTextField(),
+      content: customTextField(),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
@@ -43,12 +44,16 @@ class _PopUpStudentState extends State<PopUpStudent> {
         ),
         TextButton(
           onPressed: () {
-            if (!widget.demandMessage){
-              accountSavedUniversities[GlobalVariables.curLoggedIn.email]?.
-              add("Kungliga Tekniska Högskolan");
-              Navigator.pop(context);
-            }
-            else if (messageController.text.isNotEmpty) {
+            if (messageController.text.isNotEmpty) {
+              accountSentRequests[GlobalVariables.curLoggedIn.email]!.add(
+                Request(
+                  receiver: widget.receiver,
+                  message: messageController.text,
+                  time: DateTime.now(),
+                  answered: false,
+                  accepted: false,
+                )
+              );
               Navigator.pop(context);
               //TODO: här ska det skickas en request till unistudenten
               //TODO: tänker nån slags popup för att visa att förfrågningen skickats
@@ -70,39 +75,32 @@ class _PopUpStudentState extends State<PopUpStudent> {
     );
   }
 
-  possibleTextField() {
-    if (widget.demandMessage) {
-      return Container(
-        height: 125,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
+customTextField() {
+    return Container(
+      height: 125,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black,
         ),
-        child: TextField(
-          controller: messageController,
-          style: const TextStyle(
-            fontSize: 12,
-            fontFamily: "YoungSerif",
-          ),
-          maxLines: null,
-          decoration: InputDecoration(
-            hintText: "Beskriv kortfattat vilka frågor du vill ha svar på!",
-            hintStyle: TextStyle(
-              color: hintColor,
-              fontSize: 10,
-            ),
-            contentPadding: const EdgeInsets.all(10),
-            border: InputBorder.none,
-          ),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+      ),
+      child: TextField(
+        controller: messageController,
+        style: const TextStyle(
+          fontSize: 12,
+          fontFamily: "YoungSerif",
         ),
-      );
-    }
-    else {
-      return Container(
-        height: 0,
-      );
-    }
+        maxLines: null,
+        decoration: InputDecoration(
+          hintText: "Beskriv kortfattat vilka frågor du vill ha svar på!",
+          hintStyle: TextStyle(
+            color: hintColor,
+            fontSize: 10,
+          ),
+          contentPadding: const EdgeInsets.all(10),
+          border: InputBorder.none,
+        ),
+      ),
+    );
   }
 }

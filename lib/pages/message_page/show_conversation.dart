@@ -10,14 +10,27 @@ class ShowConversation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(),
-      body: Center(
-        child: Text(
-          "To be done :)",
-          style: TextStyle(
-            fontFamily: "YoungSerif",
-            fontSize: 40,
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: const CustomAppBar(),
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.lightBlueAccent,
+                Colors.deepOrange,
+              ],
+            )
+        ),
+        child: const Center(
+          child: Text(
+            "To be done :)",
+            style: TextStyle(
+              fontFamily: "YoungSerif",
+              fontSize: 40,
+            ),
           ),
         ),
       )

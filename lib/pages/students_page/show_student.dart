@@ -41,9 +41,9 @@ class ShowStudent extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) =>
                               PopUpStudent(
-                                  title: "Skicka kontaktförfrågan till ${student.name}",
-                                  acceptText: "Skicka",
-                                  demandMessage: true,
+                                title: "Skicka kontaktförfrågan till ${student.name}",
+                                acceptText: "Skicka",
+                                receiver: student,
                               )
                       );
                     },

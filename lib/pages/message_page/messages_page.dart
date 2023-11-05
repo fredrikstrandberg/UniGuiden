@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/pages/home_page/home_page.dart';
+import 'package:untitled/global_variables.dart';
+import 'package:untitled/pages/message_page/request.dart';
+import 'package:untitled/pages/message_page/request_card.dart';
+import 'package:untitled/pages/message_page/sent_requests_list.dart';
 import 'package:untitled/pages/message_page/show_conversation.dart';
-import '../../main.dart';
 import '/pages/page_identifier.dart';
-import 'message.dart';
-import 'message_card.dart';
-import 'message_list.dart';
+
 
 class MessagePage extends StatelessWidget {
   const MessagePage({super.key});
@@ -18,15 +18,16 @@ class MessagePage extends StatelessWidget {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              PageIdentifier("Meddelanden"),
+              const PageIdentifier("Kontakter"),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                       children:
-                      messages.map((message)
+                      accountSentRequests[GlobalVariables.curLoggedIn.email]!.map((request)
                       => GestureDetector(
-                        child: MessageCard(message: message),
+                        child: RequestCard(request: request),
                         onTap: () {
+                          function();
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => ShowConversation(),
@@ -34,7 +35,8 @@ class MessagePage extends StatelessWidget {
                           );
                         },
                       )
-                      ).toList()),
+                      ).toList()
+                  ),
                 ),
               ),
 
@@ -43,4 +45,22 @@ class MessagePage extends StatelessWidget {
       ),
     );
   }
+  function() {
+    List? accountSentRequestsList = accountSentRequests[GlobalVariables.curLoggedIn.email];
+
+    if (accountSentRequestsList != null) {
+      for (int i = 0; i < accountSentRequestsList.length; i++) {
+        Request currentObject = accountSentRequestsList[i];
+        print(currentObject.receiver.name);
+        print(currentObject.time);
+      }
+      accountSentRequestsList.sort((a, b) => a.time.compareTo(b.time));
+      for (int i = 0; i < accountSentRequestsList.length; i++) {
+        Request currentObject = accountSentRequestsList[i];
+        print(currentObject.receiver.name);
+        print(currentObject.time);
+      }
+    }
+  }
 }
+
