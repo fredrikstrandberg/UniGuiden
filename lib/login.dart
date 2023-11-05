@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Center(
                   child: Column(
                     children: [
-                      SizedBox(height: 100),
+                      const SizedBox(height: 100),
                       Image.asset("images/login.png", width: 300),
                       const SizedBox(height: 10),
                       const Text(
@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            HandleLogin(context, emailController.text, passwordController.text);
+                            handleLogin(context, emailController.text, passwordController.text);
                           },
                           style: ElevatedButton.styleFrom(
                           textStyle: const TextStyle(

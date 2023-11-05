@@ -15,7 +15,7 @@ class ShowStudent extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: const CustomAppBar(),
       body: Container(
-        padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
         decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,

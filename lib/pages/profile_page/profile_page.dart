@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/profile_page/edit_profile_page.dart';
-import '../../account/account_list.dart';
 import '../../global_variables.dart';
 import '/pages/page_identifier.dart';
 import 'calculate_age.dart';
@@ -30,7 +29,7 @@ class ProfilePage extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => editProfilePage(),
+                                  builder: (context) => const editProfilePage(),
                                 ),
                               );
                             },

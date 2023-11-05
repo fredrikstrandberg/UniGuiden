@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/profile_page/submit_profile_edits.dart';
-import '../../account/account_list.dart';
 import '../../app_bar.dart';
 import '../../global_variables.dart';
 import '/pages/page_identifier.dart';
@@ -21,9 +20,9 @@ class editProfilePage extends StatelessWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: Container(
-          padding: EdgeInsets.fromLTRB(0, 120, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
           decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,

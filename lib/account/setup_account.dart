@@ -60,7 +60,7 @@ class SetupAccount extends StatelessWidget {
                     const SizedBox(height: 10),
                     ElevatedButton(
                         onPressed: () async {
-                          if (await CheckAccount(
+                          if (await checkAccount(
                             context,
                             emailController.text,
                             passwordController.text,

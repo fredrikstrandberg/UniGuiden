@@ -3,6 +3,9 @@ import 'package:untitled/account/handle_login.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'account.dart';
+import 'account_list.dart';
+
 
 CreateAccount(context, String email, password, name, birthdate, highschool, education, city) {
 
@@ -23,9 +26,25 @@ CreateAccount(context, String email, password, name, birthdate, highschool, educ
   handleLogin(context, email, password);
 
   // Navigator.pushNamedAndRemoveUntil(context, "/main", (Route<dynamic> route) => false);
-}*/
+}
 
-Future<void> createAccount(BuildContext context, String email, String password, String name, String birthdate) async {
+Future<void> createAccountAndLogin(
+    BuildContext context,
+    String email,
+    String password,
+    String name,
+    String birthDate,
+    String highschool,
+    String education,
+    String city,
+    String accountType,
+
+    ) async {
+  await createAccount(context, email, password, name, birthDate, highschool, education, city, accountType);
+  await handleLogin(context, email, password);
+}
+
+Future<void> createAccount(BuildContext context, String email, String password, String name, String birthdate, String highschool, String education, String city, String accountType) async {
   email = email.toLowerCase();
 
   // Skapa ett JSON-objekt med användarinformation
@@ -34,9 +53,13 @@ Future<void> createAccount(BuildContext context, String email, String password, 
     'password': password,
     'name': name,
     'birthdate': birthdate,
+    'highschool': highschool,
+    'education': education,
+    'city': city,
+    'accountType': accountType,
   };
   //final url = Uri.http("10.0.2.2:3000", "/login");
-  final url = Uri.parse('http://10.0.2.2:3000/addUser');
+  final url = Uri.parse('http://10.0.2.2:3000/addUser'); //lägger till inlogg
   final response = await http.post(url,
 
   headers: <String, String>{
@@ -48,7 +71,7 @@ Future<void> createAccount(BuildContext context, String email, String password, 
     // Användaren har lagts till på servern, du kan göra något här om det behövs
     // handleLogin(context, email, password);
     print("ok status");
-    await createStudentAccount(context, email, password, name, birthdate); //Provisorisk
+    await createStudentAccount(context, userData); //lägger till användare med uppgifter
     return;
   } else {
     print("fel adduser");
@@ -57,27 +80,16 @@ Future<void> createAccount(BuildContext context, String email, String password, 
   }
 }
 
-Future<void> createAccountAndLogin(
-    BuildContext context,
-    String email,
-    String password,
-    String name,
-    String birthDate,
-    ) async {
-  await createAccount(context, email, password, name, birthDate);
-  await handleLogin(context, email, password);
-}
-
-createStudentAccount(BuildContext context, String email, String password, String name, String birthdate) async {
-  email = email.toLowerCase();
+createStudentAccount(BuildContext context, Map<String, dynamic> userData, ) async {
+  //email = email.toLowerCase();
 
   // Skapa ett JSON-objekt med användarinformation
-  final Map<String, dynamic> userData = {
+ /* final Map<String, dynamic> userData = {
     'email': email,
     'password': password,
     'name': name,
     'birthdate': birthdate,
-  };
+  };*/
   //final url = Uri.http("10.0.2.2:3000", "/login");
   final url = Uri.parse('http://10.0.2.2:3000/addStudent');
   final response = await http.post(url,

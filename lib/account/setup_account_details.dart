@@ -81,7 +81,7 @@ class SetupAccountDetails extends StatelessWidget {
 
                         const SizedBox(height: 10),
                         ElevatedButton(
-                            onPressed: () {
+/*                            onPressed: () {
                               CreateAccount(
                                 context,
                                 email,
@@ -98,8 +98,27 @@ class SetupAccountDetails extends StatelessWidget {
                                     fontSize: 20,
                                     fontFamily: "YoungSerif"),
                                 backgroundColor: Colors.blue[900]),
+                            child: const Text("Skapa konto")*/
+                            onPressed: () async {
+                              await createAccountAndLogin(
+                                  context,
+                                  email,
+                                  password,
+                                  nameController.text,
+                                  birthDateController.text,
+                                  highschoolController.text,
+                                  educationController.text,
+                                  cityController.text,
+                                  "highschool", //provisional for account type
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                                textStyle: const TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: "YoungSerif"),
+                                backgroundColor: Colors.blue[900]),
                             child: const Text("Skapa konto")
-                          onPressed: () async {
+                          /*onPressed: () async {
 
                             await createAccountAndLogin(context, email, password, nameController.text, birthDateController.text);
                           },
@@ -107,7 +126,7 @@ class SetupAccountDetails extends StatelessWidget {
                             textStyle: const TextStyle(fontSize: 20, fontFamily: "YoungSerif"),
                             backgroundColor: Colors.blue[900],
                           ),
-                          child: const Text("Skapa konto"),
+                          child: const Text("Skapa konto"),*/
                         ),
                       ],
                     ),

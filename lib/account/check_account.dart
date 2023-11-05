@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 
-CheckAccount(context, email, password, repeatPassword) async {
+checkAccount(context, email, password, repeatPassword) async {
   bool validEmail = EmailValidator.validate(email);
   bool passInput = password.toString().isNotEmpty;
   bool repeatPassInput = repeatPassword.toString().isNotEmpty;
