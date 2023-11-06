@@ -48,7 +48,6 @@ class MyUniversitesPosts extends StatelessWidget {
                       backgroundColor: Colors.blue[900],
                       color: Colors.white,
                       onRefresh: () async {
-                        print("refreshing");
                         await Future.delayed(const Duration(seconds: 2));
                       },
                       child: const CustomScrollView()
@@ -82,7 +81,6 @@ class _CustomScrollViewState extends State<CustomScrollView> {
         savedUniversiteiesPosts.add(post);
       }
     });
-    print(savedUniversiteiesPosts);
 
 
     return SingleChildScrollView(

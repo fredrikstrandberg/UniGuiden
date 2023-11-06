@@ -8,7 +8,8 @@ final List<Account> accountList = [
     birthdate: "2000-01-01",
     highschool: "N/A",
     education: "N/A",
-    city: "N/A"
+    city: "N/A",
+    description: "",
   ),
   Account(
       email: "f@s.se",
@@ -17,7 +18,8 @@ final List<Account> accountList = [
       birthdate: "1999-12-27",
       highschool: "Tibble Gymnasium",
       education: "Ekonomi",
-      city: "Täby"
+      city: "Täby",
+      description: "",
   ),
 ];
 

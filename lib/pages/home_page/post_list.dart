@@ -26,34 +26,43 @@ final List<Post> posts = [
       saved: false,
   ),
   Post(
-      university: "Test",
+      university: "Uppsala Universitet",
       title: "Test",
       date: "Datum",
       place: "Plats",
       description:
       "Beskrivning",
-      imageName: "profile.png",
+      imageName: "uppsala.png",
       saved: false,
   ),
   Post(
-    university: "Test",
+    university: "Chalmers Universitet",
     title: "Test",
     date: "Datum",
     place: "Plats",
     description:
     "Beskrivning",
-    imageName: "profile.png",
+    imageName: "chalmers.png",
     saved: false,
   ),
   Post(
-    university: "Test",
+    university: "Örebro Unviversitet",
     title: "Test",
     date: "Datum",
     place: "Plats",
     description:
     "Beskrivning",
-    imageName: "profile.png",
+    imageName: "örebro.png",
     saved: false,
   ),
-
+  Post(
+    university: "Stockholms Universitet",
+    title: "Test",
+    date: "Datum",
+    place: "Plats",
+    description:
+    "Beskrivning",
+    imageName: "SU.png",
+    saved: false,
+  ),
 ];

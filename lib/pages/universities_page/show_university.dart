@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/pages/universities_page/university_description.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../global_variables.dart';
 import '../home_page/my_universities_list.dart';
 import 'pop_up_add_university.dart';
@@ -55,24 +57,47 @@ class ShowUniversity extends StatelessWidget {
                         fontFamily: "YoungSerif",
                       ),
                     ),
-                    const SizedBox(height: 40),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Text("Vänster"),
-                          ],
+                    Text(
+                      university.city,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontFamily: "YoungSerif",
+                        color: Colors.black54,
+                      ),
+                    ),
+                    TextButton(
+                      child: Text(
+                          university.website,
+                          style: TextStyle(
+                            color: Colors.blue[900],
+                            fontFamily: "YoungSerif"
+                          )
+                      ),
+                      onPressed: () {
+                        launchUrlString(university.website);
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white.withOpacity(0.6),
+                      ),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          minHeight: 200,
+                          maxHeight: 300,
                         ),
-                        Column(
-                          children: [
-                            Text("Höger"),
-                          ],
-                        )
-
-                      ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: UniDescription(),
+                          )
+                        ),
+                      ),
                     )
-
                   ],
                 ),
               ),
@@ -82,7 +107,42 @@ class ShowUniversity extends StatelessWidget {
       ),
     );
   }
+  UniDescription() {
+    List<Widget> returnColumn = [];
+    if (universityDescriptions.containsKey(university.name)) {
+      for (var key in universityDescriptions[university.name]!.keys) {
+        returnColumn.add(
+            Text(
+              key,
+              style: const TextStyle(
+                fontFamily: "YoungSerif",
+                fontSize: 18,
+              ),
+            )
+        );
+        returnColumn.add(const SizedBox(height: 5));
+
+        for (var val in universityDescriptions[university.name]![key]!) {
+          returnColumn.add(
+              Text(
+                val,
+                style: const TextStyle(
+                  fontFamily: "SourceSerif",
+                  fontSize: 12,
+                  color: Colors.black87
+                ),
+              )
+          );
+        }
+        returnColumn.add(const SizedBox(height: 20));
+      }
+      return returnColumn;
+    }
+    return [const Text("beskrivning")];
+  }
 }
+
+
 
 
 class CustomIconButton extends StatefulWidget {
@@ -95,6 +155,8 @@ class CustomIconButton extends StatefulWidget {
 }
 
 class _CustomIconButtonState extends State<CustomIconButton> {
+
+
 
   @override
   Widget build(BuildContext context) {

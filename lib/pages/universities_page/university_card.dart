@@ -28,19 +28,18 @@ class UniversityCard extends StatelessWidget {
                   Text(
                     university.city,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontFamily: "YoungSerif",
+                      color: Colors.black54,
                     ),
                   ),
-                  Text(
-                    university.description,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontFamily: "YoungSerif",
-                    ),
-                  ),
-
-
+                  // Text(
+                  //   university.description,
+                  //   style: const TextStyle(
+                  //     fontSize: 12,
+                  //     fontFamily: "YoungSerif",
+                  //   ),
+                  // ),
               ],
             ),
               CircleAvatar(

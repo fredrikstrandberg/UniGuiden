@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/global_variables.dart';
 import 'package:untitled/pages/home_page/post_card.dart';
-import 'package:untitled/pages/home_page/post_list.dart';
 import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import '../page_identifier.dart';
-import '../students_page/pop_up_contact_student.dart';
 import '/app_bar.dart';
 
 class ShowSavedPosts extends StatelessWidget {
@@ -70,7 +68,6 @@ class CustomScrollView extends StatefulWidget {
 class _CustomScrollViewState extends State<CustomScrollView> {
   @override
   Widget build(BuildContext context) {
-    print("rebuilding");
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(

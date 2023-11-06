@@ -3,6 +3,7 @@ import 'package:untitled/pages/home_page/my_universities_posts.dart';
 import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import 'package:untitled/pages/home_page/show_saved_posts.dart';
 import '../../global_variables.dart';
+import '../students_page/filter_popup.dart';
 import '/pages/home_page/post_card.dart';
 import '/pages/page_identifier.dart';
 import 'post_list.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.fromLTRB(10,0,10,0),
         child: Column(
           children: [
+            customPageIdentifier(),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () {
@@ -43,7 +45,6 @@ class _HomePageState extends State<HomePage> {
                     builder: (context) {
                       return Column(
                           children:
-                          <Widget> [customPageIdentifier()] +
                           fetchedPosts.map((post) => UniversityPost(post: post)).toList(),
                       );
                     }
@@ -103,10 +104,10 @@ class _HomePageState extends State<HomePage> {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const ShowSavedPosts(),
-                    ),
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                      const filterPopUp()
                   );
                 },
                 icon: const Icon(

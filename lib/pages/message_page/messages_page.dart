@@ -23,44 +23,40 @@ class MessagePage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                       children:
-                      accountSentRequests[GlobalVariables.curLoggedIn.email]!.map((request)
-                      => GestureDetector(
-                        child: RequestCard(request: request),
-                        onTap: () {
-                          function();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => ShowConversation(),
-                            ),
-                          );
-                        },
-                      )
-                      ).toList()
+                        returnChildren(context)
                   ),
                 ),
               ),
-
             ]
         ),
       ),
     );
   }
-  function() {
-    List? accountSentRequestsList = accountSentRequests[GlobalVariables.curLoggedIn.email];
-
-    if (accountSentRequestsList != null) {
-      for (int i = 0; i < accountSentRequestsList.length; i++) {
-        Request currentObject = accountSentRequestsList[i];
-        print(currentObject.receiver.name);
-        print(currentObject.time);
-      }
-      accountSentRequestsList.sort((a, b) => a.time.compareTo(b.time));
-      for (int i = 0; i < accountSentRequestsList.length; i++) {
-        Request currentObject = accountSentRequestsList[i];
-        print(currentObject.receiver.name);
-        print(currentObject.time);
-      }
+  sortListOnTime() {
+    if (accountSentRequests[GlobalVariables.curLoggedIn.email] == null){
+      return [];
     }
+    List<Request>? accountSentRequestsList = accountSentRequests[GlobalVariables.curLoggedIn.email];
+    accountSentRequestsList!.sort((a, b) => b.time.compareTo(a.time));
+    return accountSentRequestsList;
+  }
+
+  returnChildren(context) {
+    List sortedList = sortListOnTime();
+    print(sortedList);
+
+    return sortListOnTime()!.map<Widget>((request)
+    => GestureDetector(
+      child: RequestCard(request: request),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ShowConversation(request: request),
+          ),
+        );
+      },
+    )
+    ).toList();
   }
 }
 

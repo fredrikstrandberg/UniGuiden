@@ -7,6 +7,7 @@ class Account {
   String highschool;
   String education;
   String city;
+  String description;
 
   Account({
     required this.email,
@@ -16,6 +17,7 @@ class Account {
     required this.highschool,
     required this.education,
     required this.city,
+    required this.description,
   });
 
 }
