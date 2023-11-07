@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/message_page/request.dart';
 import '../students_page/student.dart';
@@ -28,18 +29,15 @@ class _PopUpMessageState extends State<PopUpMessage> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              Text(
-                textAlign: TextAlign.start,
-                widget.request.message,
-                style: const TextStyle(
-                  fontFamily: "SourceSerif",
-                  fontSize: 12,
-                  color: Colors.black,
-                ),
-              ),
-            ],
+          Text(
+            textAlign: TextAlign.start,
+            widget.request.message,
+            maxLines: null,
+            style: const TextStyle(
+              fontFamily: "SourceSerif",
+              fontSize: 12,
+              color: Colors.black,
+            ),
           ),
           const SizedBox(height: 40),
           Text(
@@ -54,11 +52,11 @@ class _PopUpMessageState extends State<PopUpMessage> {
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.star),
-              Icon(Icons.star),
-              Icon(Icons.star),
-              Icon(Icons.star),
-              Icon(Icons.star_border),
+              Icon(Icons.star, color: CupertinoColors.systemYellow),
+              Icon(Icons.star, color: CupertinoColors.systemYellow),
+              Icon(Icons.star, color: CupertinoColors.systemYellow),
+              Icon(Icons.star, color: CupertinoColors.systemYellow),
+              Icon(Icons.star_border, color: CupertinoColors.systemYellow),
             ],
           )
         ],

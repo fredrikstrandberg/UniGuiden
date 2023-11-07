@@ -92,7 +92,8 @@ customTextField() {
         ),
         maxLines: null,
         decoration: InputDecoration(
-          hintText: "Beskriv kortfattat vilka frågor du vill ha svar på!",
+          hintMaxLines: null,
+          hintText: "Vilka frågor du vill ha svar på?",
           hintStyle: TextStyle(
             color: hintColor,
             fontSize: 10,

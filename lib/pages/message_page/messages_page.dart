@@ -18,7 +18,7 @@ class MessagePage extends StatelessWidget {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const PageIdentifier("Kontakter"),
+              const PageIdentifier("Förfrågningar"),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(

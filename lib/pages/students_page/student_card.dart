@@ -8,6 +8,10 @@ class StudentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color badgeColor = Colors.transparent;
+    if (student.ambassador) {
+      badgeColor = Colors.black;
+    }
     return Card(
         color: Colors.white.withOpacity(0.9),
         child: Padding(
@@ -18,12 +22,21 @@ class StudentCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    student.name,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontFamily: "YoungSerif",
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        student.name,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: "YoungSerif",
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Icon(
+                        Icons.badge_outlined,
+                        color: badgeColor,
+                      )
+                    ],
                   ),
                   Text(
                     "Ålder: ${student.age}",

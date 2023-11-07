@@ -36,6 +36,16 @@ final List<Post> posts = [
       saved: false,
   ),
   Post(
+    university: "7-Eleven",
+    title: "Stans bästa kopp",
+    date: "Nybryggt och nypressat!",
+    place: "",
+    description:
+    "",
+    imageName: "7eleven.png",
+    saved: false,
+  ),
+  Post(
     university: "Chalmers Universitet",
     title: "Test",
     date: "Datum",

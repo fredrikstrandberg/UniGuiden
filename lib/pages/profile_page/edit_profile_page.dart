@@ -22,6 +22,7 @@ class editProfilePage extends StatelessWidget {
 
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
         appBar: CustomAppBar(),
         body: Container(

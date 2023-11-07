@@ -42,8 +42,8 @@ final List<Student> students = [
     ambassador: false,
   ),
   Student(
-    name: "John Doe",
-    age: 35,
+    name: "Lund Lundström",
+    age: 21,
     university: "Lunds Universitet",
     program: "Ekonomi",
     year: 1,

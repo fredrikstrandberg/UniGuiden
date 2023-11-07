@@ -11,7 +11,14 @@ class ShowStudent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Color badgeColor = Colors.transparent;
+    if (student.ambassador) {
+      badgeColor = Colors.black;
+    }
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: const CustomAppBar(),
       body: Container(
@@ -68,7 +75,25 @@ class ShowStudent extends StatelessWidget {
                         fontFamily: "YoungSerif",
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.badge_outlined,
+                          color: badgeColor,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Ambassadör",
+                          style: TextStyle(
+                            color: badgeColor,
+                            fontFamily: "SourceSerif"
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -82,7 +107,7 @@ class ShowStudent extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const Icon(
                                     Icons.school
@@ -91,14 +116,14 @@ class ShowStudent extends StatelessWidget {
                                   Text(student.university,
                                     style: const TextStyle(
                                       fontFamily: "YoungSerif",
-                                      fontSize: 15,
+                                      fontSize: 12,
                                     ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const Icon(
                                       Icons.my_library_books_rounded
@@ -107,7 +132,7 @@ class ShowStudent extends StatelessWidget {
                                   Text(student.program,
                                     style: const TextStyle(
                                       fontFamily: "YoungSerif",
-                                      fontSize: 14,
+                                      fontSize: 12,
                                     ),
                                   ),
                                 ],
@@ -136,7 +161,7 @@ class ShowStudent extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const Icon(
                                       Icons.location_city
@@ -145,7 +170,7 @@ class ShowStudent extends StatelessWidget {
                                   Text(student.city,
                                     style: const TextStyle(
                                       fontFamily: "YoungSerif",
-                                      fontSize: 15,
+                                      fontSize: 12,
                                     ),
                                   ),
                                 ],
@@ -160,7 +185,7 @@ class ShowStudent extends StatelessWidget {
                                   Text("${student.age} år",
                                     style: const TextStyle(
                                       fontFamily: "YoungSerif",
-                                      fontSize: 14,
+                                      fontSize: 12,
                                     ),
                                   ),
                                 ],

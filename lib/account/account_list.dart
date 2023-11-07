@@ -21,9 +21,20 @@ final List<Account> accountList = [
       city: "Täby",
       description: "",
   ),
+  Account(
+    email: "john@doe.se",
+    password: "password",
+    name: "John Doe",
+    birthdate: "2004-01-01",
+    highschool: "Örebro Gymnasium",
+    education: "Ekonomi",
+    city: "Örebro",
+    description: "",
+  ),
 ];
 
 final Map<String, String> accountMap = {
   "admin@admin.se" : "admin",
   "f@s.se" : "pass",
+  "john@doe.se" : "password"
 };
