@@ -1,7 +1,7 @@
 import '../students_page/student_list.dart';
 import 'message.dart';
 
-final Map<String, List<Message>> conversation = {
+final Map<String, List<Message>> conversations = {
 
   "john@doe.se" : [
     Message(

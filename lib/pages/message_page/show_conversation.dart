@@ -95,10 +95,10 @@ class ShowConversation extends StatelessWidget {
                       child: requestBox(context, endChatIcon),
                     ),
                     const SizedBox(height: 20),
-                    const Column(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomChatWidget(),
+                        CustomChatWidget(request: request),
                         // Container(
                         //   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         //   width: double.infinity,
@@ -199,7 +199,9 @@ class ShowConversation extends StatelessWidget {
 
 
 class CustomChatWidget extends StatefulWidget {
-  const CustomChatWidget({super.key});
+  const CustomChatWidget({super.key, required this.request});
+
+  final Request request;
 
 
   @override
@@ -214,8 +216,10 @@ class _customChatWidgetState extends State<CustomChatWidget> {
       children: [
         SingleChildScrollView(
           child: Column(
-              children:
-              conversation[GlobalVariables.curLoggedIn.email]!.map((message) => CustomMessageCard(message: message)).toList()
+            children: conversations[GlobalVariables.curLoggedIn.email]!
+                .where((message) => message.student == widget.request.receiver)
+                .map((message) => CustomMessageCard(message: message))
+                .toList(),
           ),
         ),
       ],
@@ -236,19 +240,34 @@ class CustomMessageCard extends StatelessWidget {
     String imageLink = "profile.png";
     if (!message.accountSender) {
       imageLink = message.student.imageName;
+    }
+
+    Widget circleAvatar = CircleAvatar(
+        radius: 20,
+        backgroundColor: Colors.transparent,
+        child: SizedBox(
+            child: ClipOval(
+              child: Image.asset("images/$imageLink",
+              ),
+            )
+        )
+    );
+
+    Text messageText = Text(
+      message.message,
+      textAlign: TextAlign.start,
+      maxLines: null,
+      style: const TextStyle(
+          fontFamily: "SourceSerif",
+          fontSize: 12
+      ),
+    );
+
+    if (!message.accountSender) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.transparent,
-              child: SizedBox(
-                  child: ClipOval(
-                    child: Image.asset("images/$imageLink",
-                    ),
-                  )
-              )
-          ),
+          circleAvatar,
           const SizedBox(width: 10),
           Expanded(
             child: Container(
@@ -257,15 +276,7 @@ class CustomMessageCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white.withOpacity(0.6),
                 ),
-              child: Text(
-                message.message,
-                textAlign: TextAlign.start,
-                maxLines: null,
-                style: const TextStyle(
-                  fontFamily: "SourceSerif",
-                  fontSize: 12
-                ),
-              ),
+              child: messageText,
             ),
           )
         ],
@@ -285,27 +296,10 @@ class CustomMessageCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white.withOpacity(0.6),
                 ),
-                child: Text(
-                  message.message,
-                  textAlign: TextAlign.end,
-                  maxLines: null,
-                  style: const TextStyle(
-                      fontFamily: "SourceSerif",
-                      fontSize: 12
-                  ),
-                ),
+                child: messageText,
               ),
               const SizedBox(width: 10),
-              CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.transparent,
-                  child: SizedBox(
-                      child: ClipOval(
-                        child: Image.asset("images/$imageLink",
-                        ),
-                      )
-                  )
-              )
+              circleAvatar,
             ],
 
           ),
