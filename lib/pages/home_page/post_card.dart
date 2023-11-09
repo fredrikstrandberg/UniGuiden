@@ -31,8 +31,8 @@ class UniversityPost extends StatelessWidget {
                   const Flexible(child: SizedBox(width: 1000)),
                   SavedPost(savedPost: post),
                   CircleAvatar(
-                      radius: 25,
-                      backgroundImage: AssetImage("images/${post.imageName}"),
+                      radius: 30,
+                      backgroundImage:  NetworkImage(post.imageName),
                       backgroundColor: Colors.transparent,
                   )
                 ],

@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Center(
                   child: Column(
                     children: [
-                      SizedBox(height: 100),
+                      const SizedBox(height: 100),
                       Image.asset("images/uniGuiden3.png", width: 300),
                       const SizedBox(height: 20),
                       // const Text(

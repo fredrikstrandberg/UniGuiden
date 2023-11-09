@@ -4,10 +4,7 @@ import 'package:untitled/pages/home_page/my_universities_list.dart';
 import 'package:untitled/pages/home_page/post.dart';
 import 'package:untitled/pages/home_page/post_card.dart';
 import 'package:untitled/pages/home_page/post_list.dart';
-import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import '../page_identifier.dart';
-import '../universities_page/university.dart';
-import '../students_page/pop_up_contact_student.dart';
 import '/app_bar.dart';
 
 class MyUniversitesPosts extends StatelessWidget {
@@ -21,7 +18,7 @@ class MyUniversitesPosts extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: const CustomAppBar(),
       body: Container(
-        padding: EdgeInsets.fromLTRB(0, 120, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
         decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -77,11 +74,11 @@ class _CustomScrollViewState extends State<CustomScrollView> {
 
     List<Post> savedUniversiteiesPosts = [];
 
-    posts.forEach((Post post) {
+   /* for (var post in posts) {
       if (savedUniversities!.contains(post.university)) {
         savedUniversiteiesPosts.add(post);
       }
-    });
+    }*/
     print(savedUniversiteiesPosts);
 
 

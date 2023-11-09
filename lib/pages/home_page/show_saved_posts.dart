@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/global_variables.dart';
 import 'package:untitled/pages/home_page/post_card.dart';
-import 'package:untitled/pages/home_page/post_list.dart';
 import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import '../page_identifier.dart';
-import '../students_page/pop_up_contact_student.dart';
 import '/app_bar.dart';
 
 class ShowSavedPosts extends StatelessWidget {
@@ -16,9 +14,9 @@ class ShowSavedPosts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         body: Container(
-          padding: EdgeInsets.fromLTRB(0, 120, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
           decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,

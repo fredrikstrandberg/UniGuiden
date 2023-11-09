@@ -34,7 +34,7 @@ class _PopupMenuExampleState extends State<PopupMenuExample> {
       appBar: AppBar(title: const Text('PopupMenuButton')),
       body: Center(
         child: PopupMenuButton<SampleItem>(
-          icon: Icon(Icons.add_circle_outline),
+          icon: const Icon(Icons.add_circle_outline),
           initialValue: selectedMenu,
           // Callback that sets the selected popup menu item.
           onSelected: (SampleItem item) {

@@ -14,7 +14,7 @@ class MessagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -30,7 +30,7 @@ class MessagePage extends StatelessWidget {
                           function();
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => ShowConversation(),
+                              builder: (context) => const ShowConversation(),
                             ),
                           );
                         },

@@ -59,7 +59,7 @@ Future<void> createAccount(BuildContext context, String email, String password, 
     'accountType': accountType,
   };
   //final url = Uri.http("10.0.2.2:3000", "/login");
-  final url = Uri.parse('http://10.0.2.2:3000/addUser'); //lägger till inlogg
+  final url = Uri.parse('http://10.0.2.2:3000/addLogin'); //lägger till inlogg
   final response = await http.post(url,
 
   headers: <String, String>{
@@ -71,7 +71,8 @@ Future<void> createAccount(BuildContext context, String email, String password, 
     // Användaren har lagts till på servern, du kan göra något här om det behövs
     // handleLogin(context, email, password);
     print("ok status");
-    await createStudentAccount(context, userData); //lägger till användare med uppgifter
+
+    await createProfile(context, userData); //lägger till användare med uppgifter
     return;
   } else {
     print("fel adduser");
@@ -80,7 +81,7 @@ Future<void> createAccount(BuildContext context, String email, String password, 
   }
 }
 
-createStudentAccount(BuildContext context, Map<String, dynamic> userData, ) async {
+createProfile(BuildContext context, Map<String, dynamic> userData, ) async {
   //email = email.toLowerCase();
 
   // Skapa ett JSON-objekt med användarinformation
@@ -91,7 +92,7 @@ createStudentAccount(BuildContext context, Map<String, dynamic> userData, ) asyn
     'birthdate': birthdate,
   };*/
   //final url = Uri.http("10.0.2.2:3000", "/login");
-  final url = Uri.parse('http://10.0.2.2:3000/addStudent');
+  final url = Uri.parse('http://10.0.2.2:3000/addProfile');
   final response = await http.post(url,
 
     headers: <String, String>{
@@ -104,7 +105,7 @@ createStudentAccount(BuildContext context, Map<String, dynamic> userData, ) asyn
     // handleLogin(context, email, password);
     print("ok status");
   }else {
-    print("fel addStudent");
+    print("fel addProfile");
     return;
     // Något gick fel vid förfrågan till servern, du kan hantera det här
   }

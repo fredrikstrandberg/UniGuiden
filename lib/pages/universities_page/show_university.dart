@@ -44,7 +44,7 @@ class ShowUniversity extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 100,
-                      backgroundImage:AssetImage("images/${university.imageName}"),
+                      backgroundImage: NetworkImage(university.imagePath), // Använd NetworkImage
                       backgroundColor: Colors.transparent,
                     ),
                     const SizedBox(height: 10),

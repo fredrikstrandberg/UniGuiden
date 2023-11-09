@@ -45,7 +45,7 @@ class UniversityCard extends StatelessWidget {
             ),
               CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage("images/${university.imageName}"),
+                backgroundImage: NetworkImage(university.imagePath), // Använd NetworkImage
                 backgroundColor: Colors.transparent,
               ),
           ]
