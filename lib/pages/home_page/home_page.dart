@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/home_page/my_universities_posts.dart';
-import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import 'package:untitled/pages/home_page/show_saved_posts.dart';
-import '../../global_variables.dart';
 import '../students_page/filter_popup.dart';
 import '/pages/home_page/post_card.dart';
 import '/pages/page_identifier.dart';
@@ -30,12 +28,10 @@ class _HomePageState extends State<HomePage> {
             customPageIdentifier(),
             Expanded(
               child: RefreshIndicator(
-                onRefresh: () {
-                  setState(() {
-                    fetchedPosts = posts;
-                  });
-                  return Future.delayed(const Duration(seconds: 2));
-                },
+                onRefresh: () async {
+                  await Future.delayed(const Duration(seconds: 1));
+                  setState(() {});
+                  },
                 //async => await Future.delayed(const Duration(seconds: 2)),
                 backgroundColor: Colors.blue[900],
                 color: Colors.white,
@@ -45,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (context) {
                       return Column(
                           children:
-                          fetchedPosts.map((post) => UniversityPost(post: post)).toList(),
+                          posts.map((post) => UniversityPost(key: UniqueKey(), post: post)).toList(),
                       );
                     }
                   ),

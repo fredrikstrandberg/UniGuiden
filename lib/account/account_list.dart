@@ -26,7 +26,7 @@ final List<Account> accountList = [
     password: "password",
     name: "John Doe",
     birthdate: "2004-01-01",
-    highschool: "Örebro Gymnasium",
+    highschool: "Gymnasium",
     education: "Ekonomi",
     city: "Örebro",
     description: "",

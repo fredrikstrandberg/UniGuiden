@@ -27,11 +27,11 @@ final List<Post> posts = [
   ),
   Post(
       university: "Uppsala Universitet",
-      title: "Test",
-      date: "Datum",
-      place: "Plats",
+      title: "Öppet Hus",
+      date: "22 Mars 10:00 - 15:00",
+      place: "Uppsala Universitet, 751 05 Uppsala",
       description:
-      "Beskrivning",
+      "Vi har öppet hus för nya studenter!",
       imageName: "uppsala.png",
       saved: false,
   ),

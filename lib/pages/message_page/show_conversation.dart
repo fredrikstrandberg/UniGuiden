@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:untitled/global_variables.dart';
 import 'package:untitled/pages/message_page/pop_up_message.dart';
 import 'package:untitled/pages/message_page/request.dart';
-import '../students_page/pop_up_contact_student.dart';
-import '../students_page/student.dart';
-import '../universities_page/pop_up_add_university.dart';
-import 'conversation.dart';
 import '/app_bar.dart';
 import 'conversation_list.dart';
 import 'message.dart';
-import 'message_list.dart';
 
 class ShowConversation extends StatelessWidget {
 
@@ -46,6 +41,7 @@ class ShowConversation extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(10,0,10,0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,12 +73,35 @@ class ShowConversation extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      request.receiver.name,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: "YoungSerif",
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const SizedBox(
+                          width: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.call)
+                            ],
+                          ),
+                        ),
+                        Text(
+                          request.receiver.name,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: "YoungSerif",
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(Icons.more_vert_sharp),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 20),
                     Container(

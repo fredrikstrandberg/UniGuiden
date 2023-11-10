@@ -5,11 +5,16 @@ import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import '../page_identifier.dart';
 import '/app_bar.dart';
 
-class ShowSavedPosts extends StatelessWidget {
+class ShowSavedPosts extends StatefulWidget {
 
   //final Conversation conversation;
   const ShowSavedPosts({super.key});
 
+  @override
+  State<ShowSavedPosts> createState() => _ShowSavedPostsState();
+}
+
+class _ShowSavedPostsState extends State<ShowSavedPosts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,28 +32,20 @@ class ShowSavedPosts extends StatelessWidget {
                 ],
               )
           ),
-          child: Center(
+          child: const Center(
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
               child: Column(
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       PageIdentifier("Sparade inlägg"),
                     ],
                   ),
                   Expanded(
-                    child: RefreshIndicator(
-                      backgroundColor: Colors.blue[900],
-                      color: Colors.white,
-                      onRefresh: () async {
-                        print("refreshing");
-                        await Future.delayed(const Duration(seconds: 2));
-                      },
-                    child: const CustomScrollView()
+                    child: CustomScrollView()
                     ),
-                  ),
                 ],
               ),
             ),
@@ -68,14 +65,21 @@ class CustomScrollView extends StatefulWidget {
 class _CustomScrollViewState extends State<CustomScrollView> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return RefreshIndicator(
+        backgroundColor: Colors.blue[900],
+        color: Colors.white,
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 1));
+          setState(() {});
+          },
+    child: SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         children:
         accountSavedPosts[GlobalVariables.curLoggedIn.email]!.map((post)
-        => UniversityPost(post: post)).toList(),
-
+        => UniversityPost(key: UniqueKey(), post: post)).toList(),
       ),
+    ),
     );
   }
 }
