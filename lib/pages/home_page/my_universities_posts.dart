@@ -63,37 +63,37 @@ class MyUniversitesPosts extends StatelessWidget {
   }
 }
 
-class CustomScrollView extends StatefulWidget {
-  const CustomScrollView({super.key});
-
-  @override
-  State<CustomScrollView> createState() => _CustomScrollViewState();
-}
-
-class _CustomScrollViewState extends State<CustomScrollView> {
-  @override
-  Widget build(BuildContext context) {
-    List<String> ?savedUniversities = accountSavedUniversities[GlobalVariables.curLoggedIn.email];
-
-    List<Post> savedUniversiteiesPosts = [];
-
-    posts.forEach((Post post) {
-      if (savedUniversities!.contains(post.university)) {
-        savedUniversiteiesPosts.add(post);
-      }
-    }*/
-    print(savedUniversiteiesPosts);
-    });
-
-
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      child: Column(
-        children:
-        savedUniversiteiesPosts.map((post)
-        => UniversityPost(post: post)).toList(),
-
-      ),
-    );
-  }
-}
+// class CustomScrollView extends StatefulWidget {
+//   const CustomScrollView({super.key});
+//
+//   @override
+//   State<CustomScrollView> createState() => _CustomScrollViewState();
+// }
+//
+// class _CustomScrollViewState extends State<CustomScrollView> {
+//   @override
+//   Widget build(BuildContext context) {
+//     List<String> ?savedUniversities = accountSavedUniversities[GlobalVariables.curLoggedIn.email];
+//
+//     List<Post> savedUniversiteiesPosts = [];
+//
+//     posts.forEach((Post post) {
+//       if (savedUniversities!.contains(post.university)) {
+//         savedUniversiteiesPosts.add(post);
+//       }
+//     }*/
+//     print(savedUniversiteiesPosts);
+//     });
+//
+//
+//     return SingleChildScrollView(
+//       physics: const AlwaysScrollableScrollPhysics(),
+//       child: Column(
+//         children:
+//         savedUniversiteiesPosts.map((post)
+//         => UniversityPost(post: post)).toList(),
+//
+//       ),
+//     );
+//   }
+// }

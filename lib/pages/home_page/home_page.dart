@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/home_page/my_universities_posts.dart';
+import 'package:untitled/pages/home_page/post.dart';
 import 'package:untitled/pages/home_page/saved_posts_list.dart';
 import 'package:untitled/pages/home_page/show_saved_posts.dart';
 import '../../global_variables.dart';
+import '../students_page/filter_popup.dart';
 import '/pages/home_page/post_card.dart';
 import '/pages/page_identifier.dart';
 import 'post_list.dart';
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   Future<List<Post>> get posts async {
+    print("hämtar posts");
     final fetchedPosts = await fetchPosts();
     print("fetched posts");
     return fetchedPosts;

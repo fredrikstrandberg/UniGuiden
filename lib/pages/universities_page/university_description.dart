@@ -1,4 +1,5 @@
 
+/*
 final Map<String, Map<String, List<String>>> universityDescriptions = {
   "Kungliga Tekniska Högskolan": {
     "Sveriges största tekniska universitet": [
@@ -65,4 +66,4 @@ final Map<String, Map<String, List<String>>> universityDescriptions = {
       "Antal fakulteter: 4"
     ]
   }
-};
+};*/

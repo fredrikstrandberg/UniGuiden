@@ -11,6 +11,7 @@ class UniversitiesPage extends StatelessWidget {
 
   Future<List<University>> get universities async {
     // Hämta universitetsdata från en databas med fetchUniversities-funktionen
+    print("hämtar universiteten");
     final universities = await fetchUniversities();
     print("hämtat universiteten");
     return universities;

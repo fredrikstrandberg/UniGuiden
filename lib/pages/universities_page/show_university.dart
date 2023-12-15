@@ -93,7 +93,7 @@ class ShowUniversity extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: UniDescription(),
+                            children: uniDescription(),
                           )
                         ),
                       ),
@@ -107,9 +107,27 @@ class ShowUniversity extends StatelessWidget {
       ),
     );
   }
-  UniDescription() {
+  List<Widget> uniDescription() {
     List<Widget> returnColumn = [];
-    if (universityDescriptions.containsKey(university.name)) {
+
+    if (university.description.isNotEmpty) {
+      returnColumn.add(
+        Text(
+          university.description,
+          style: const TextStyle(
+            fontFamily: "SourceSerif",
+            fontSize: 12,
+            color: Colors.black87,
+          ),
+        ),
+      );
+    } else {
+      returnColumn.add(const Text("Beskrivning"));
+    }
+
+    return returnColumn;
+  }
+    /*if (universityDescriptions.containsKey(university.name)) {
       for (var key in universityDescriptions[university.name]!.keys) {
         returnColumn.add(
             Text(
@@ -138,12 +156,8 @@ class ShowUniversity extends StatelessWidget {
       }
       return returnColumn;
     }
-    return [const Text("beskrivning")];
+    return [const Text("beskrivning")];*/
   }
-}
-
-
-
 
 class CustomIconButton extends StatefulWidget {
   final String universityName;
