@@ -90,7 +90,8 @@ class StudentsPage extends StatelessWidget {
                     );
                   },
                 )
-                ).toList()),
+                ).toList()
+                ),
               ),
             ),
           ],

@@ -39,6 +39,8 @@ dependencies:
   intl: ^0.18.1
   filter_list: ^1.0.2
   email_validator: ^2.1.16
+  image_picker: ^1.0.4
+  url_launcher: ^6.2.1
 
 
 dev_dependencies:
@@ -84,6 +86,10 @@ flutter:
    - family: YoungSerif
      fonts:
        - asset: fonts/YoungSerif-Regular.ttf
+
+   - family: SourceSerif
+     fonts:
+       - asset: fonts/SourceSerif.ttf
 
   #
   # For details regarding fonts from package dependencies,

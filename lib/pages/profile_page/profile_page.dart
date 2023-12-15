@@ -177,27 +177,27 @@ class ProfilePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white.withOpacity(0.6),
                     ),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Info om mig",
-                          style: TextStyle(
-                            fontFamily: "YoungSerif",
-                            fontSize: 20,
-                          ),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxHeight: 100,
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text("Info om mig",
+                              style: TextStyle(
+                                fontFamily: "YoungSerif",
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            getDescriptionText(),
+                            SizedBox(height: 10),
+                          ],
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Fyll i info om dig här!",
-                          style: TextStyle(
-                            fontFamily: "YoungSerif",
-                            fontSize: 12,
-                            color: Colors.black54
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                      ],
+                      ),
                     ),
 
                   ),
@@ -207,6 +207,27 @@ class ProfilePage extends StatelessWidget {
 
           ],
         ),
+      ),
+    );
+  }
+
+  Text getDescriptionText() {
+    String descriptionText;
+    Color descriptionColor;
+    if (GlobalVariables.curLoggedIn.description.isEmpty) {
+      descriptionText = "Berätta om dig själv!";
+      descriptionColor = Colors.black54;
+    }
+    else {
+      descriptionText = GlobalVariables.curLoggedIn.description;
+      descriptionColor = Colors.black;
+    }
+    return Text(
+      descriptionText,
+      style: TextStyle(
+          fontFamily: "YoungSerif",
+          fontSize: 12,
+          color: descriptionColor,
       ),
     );
   }

@@ -17,9 +17,20 @@ class SelectAccountType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
         appBar: const CustomAppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
+        body: Container(
+          padding: EdgeInsets.fromLTRB(10, 120, 10, 0),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.lightBlueAccent,
+                  Colors.deepOrange,
+                ],
+              )
+          ),
           child: Center(
             child: Column(
               children: [

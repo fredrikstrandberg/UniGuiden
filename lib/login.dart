@@ -19,17 +19,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.blue[900],
-      //   centerTitle: true,
-      //   title: const Text("UniGuiden"),
-      //   titleTextStyle: const TextStyle(
-      //       fontFamily: "YoungSerif",
-      //       fontSize: 20,
-      //   ),
-      // ),
+      resizeToAvoidBottomInset: false,
       body: Container(
-
         decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -50,16 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const SizedBox(height: 100),
                       Image.asset("images/uniGuiden3.png", width: 300),
-                      const SizedBox(height: 20),
-                      // const Text(
-                      //   "UniGuiden",
-                      //   style: TextStyle(
-                      //     fontFamily: "YoungSerif",
-                      //     color: Colors.white,
-                      //     fontSize: 35,
-                      //   ),
-                      // ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 40),
                       TextField(
                         controller: emailController,
                         autocorrect: false,

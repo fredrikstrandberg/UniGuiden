@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:untitled/image_picker.dart';
 import 'package:untitled/pages/profile_page/submit_profile_edits.dart';
 import '../../app_bar.dart';
 import '../../global_variables.dart';
@@ -15,10 +17,11 @@ class editProfilePage extends StatelessWidget {
     TextEditingController educationController = TextEditingController(text: GlobalVariables.curLoggedIn.education);
     TextEditingController cityController = TextEditingController(text: GlobalVariables.curLoggedIn.city);
     TextEditingController birthdateController = TextEditingController(text: GlobalVariables.curLoggedIn.birthdate);
-    TextEditingController infoController = TextEditingController();
+    TextEditingController infoController = TextEditingController(text: GlobalVariables.curLoggedIn.description);
 
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
         appBar: const CustomAppBar(),
         body: Container(
@@ -48,12 +51,15 @@ class editProfilePage extends StatelessWidget {
                         children: [
                           IconButton(
                             onPressed: () {
+                              //String imageLink =
                               submitProfileEdits(
                                   nameController.text,
                                   highschoolController.text,
                                   educationController.text,
                                   cityController.text,
-                                  birthdateController.text
+                                  birthdateController.text,
+                                  infoController.text,
+                                  //TODO: new image link or file
                               );
                               Navigator.of(context).pop(context);
                             },
@@ -64,15 +70,12 @@ class editProfilePage extends StatelessWidget {
 
                     ],
                   ),
+
                   Padding(
                     padding: const EdgeInsets.fromLTRB(10,30,10,0),
                     child: Column(
                       children: [
-                        const CircleAvatar(
-                          radius: 100,
-                          backgroundImage: AssetImage("images/profile.png"),
-                          backgroundColor: Colors.transparent,
-                        ),
+                        const ImagePickerWidget(),
                         const SizedBox(height: 10),
                         TextField(
                           textAlign: TextAlign.center,
@@ -195,20 +198,27 @@ class editProfilePage extends StatelessWidget {
                                   fontSize: 20,
                                 ),
                               ),
-                              TextField(
-                                controller: infoController,
-                                textAlign: TextAlign.start,
-                                maxLines: null,
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Fyll i info om dig här!",
-                                  hintStyle: TextStyle(
-                                    fontSize: 12
-                                  )
-                                ),
-                                style: const TextStyle(
-                                  fontFamily: "YoungSerif",
-                                  fontSize: 15,
+                              Container(
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    maxHeight: 150,
+                                  ),
+                                  child: TextField(
+                                    controller: infoController,
+                                    textAlign: TextAlign.start,
+                                    maxLines: null,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: "Fyll i info om dig här!",
+                                      hintStyle: TextStyle(
+                                        fontSize: 12
+                                      )
+                                    ),
+                                    style: const TextStyle(
+                                      fontFamily: "YoungSerif",
+                                      fontSize: 15,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],

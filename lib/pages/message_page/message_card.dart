@@ -22,7 +22,7 @@ class MessageCard extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   child: SizedBox(
                       child: ClipOval(
-                        child: Image.asset("images/${message.contactImage}",
+                        child: Image.asset("images/profile.png",
                         ),
                       )
                   )
@@ -36,8 +36,8 @@ class MessageCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          message.contact,
+                        const Text(
+                          "message.contact",
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontSize: 18,

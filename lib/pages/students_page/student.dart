@@ -7,6 +7,7 @@ class Student {
   int year;
   String city;
   String imageName;
+  bool ambassador;
 
   Student({
     required this.name,
@@ -16,6 +17,7 @@ class Student {
     required this.year,
     required this.city,
     required this.imageName,
+    required this.ambassador,
   });
 
 }

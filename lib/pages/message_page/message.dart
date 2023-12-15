@@ -1,16 +1,17 @@
+import '../../account/account.dart';
+import '../students_page/student.dart';
+
 class Message {
 
-  String contact;
-  String contactImage;
-  String sender;
+  bool accountSender;
+  Student student;
   String message;
   DateTime time;
 
 
   Message({
-    required this.contact,
-    required this.contactImage,
-    required this.sender,
+    required this.accountSender,
+    required this.student,
     required this.message,
     required this.time,
   });

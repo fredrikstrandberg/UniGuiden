@@ -20,21 +20,25 @@ class SetupAccountDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
         appBar: const CustomAppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
+        body: Container(
+          padding: EdgeInsets.fromLTRB(10, 120, 10, 0),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.lightBlueAccent,
+                  Colors.deepOrange,
+                ],
+              )
+          ),
           child: Center(
             child: Column(
               children: [
                 const PageIdentifier("Skapa konto"),
                 const SizedBox(height: 20),
-                const Text(
-                  "Välj det val som passar in bäst på dig:",
-                  style: TextStyle(
-                      fontFamily: "YoungSerif"
-                  ),
-                ),
-                const SizedBox(height: 10),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -47,9 +51,7 @@ class SetupAccountDetails extends StatelessWidget {
                             hintText: 'Namn',
                           ),
                         ),
-
-                        //TBD: Lägga in datepicker
-
+                        const SizedBox(height: 10),
                         TextField(
                           controller: birthDateController,
                           decoration: const InputDecoration(
@@ -57,6 +59,7 @@ class SetupAccountDetails extends StatelessWidget {
                             hintText: 'Födelsedatum (ÅÅÅÅ-MM-DD)',
                           ),
                         ),
+                        const SizedBox(height: 10),
                         TextField(
                           controller: highschoolController,
                           decoration: const InputDecoration(
@@ -64,6 +67,7 @@ class SetupAccountDetails extends StatelessWidget {
                             hintText: 'Gymnasium',
                           ),
                         ),
+                        const SizedBox(height: 10),
                         TextField(
                           controller: educationController,
                           decoration: const InputDecoration(
@@ -71,6 +75,7 @@ class SetupAccountDetails extends StatelessWidget {
                             hintText: 'Gymnasieutbildning',
                           ),
                         ),
+                        const SizedBox(height: 10),
                         TextField(
                           controller: cityController,
                           decoration: const InputDecoration(
@@ -78,7 +83,6 @@ class SetupAccountDetails extends StatelessWidget {
                             hintText: 'Stad/Ort',
                           ),
                         ),
-
                         const SizedBox(height: 10),
                         ElevatedButton(
 /*                            onPressed: () {
@@ -90,7 +94,8 @@ class SetupAccountDetails extends StatelessWidget {
                                 birthDateController.text,
                                 highschoolController.text,
                                 educationController.text,
-                                cityController.text
+                                cityController.text,
+                                "",
                               );
                             },
                             style: ElevatedButton.styleFrom(
