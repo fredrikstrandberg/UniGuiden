@@ -5,9 +5,9 @@ class User {
 
   User({required this.id, required this.email, required this.name});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    final role = json['role'];
-
+  factory User.fromJson(Map<String, dynamic> json, {required String role}) {
+    print(json);
+    print(role);
     switch (role) {
       case 'highschool':
         return HighSchoolStudent.fromJson(json);
@@ -26,7 +26,8 @@ class HighSchoolStudent extends User {
   final String highschool;
   final String education;
   final String city;
-  final String imagePath;
+  final String? description;
+  final String? imagePath;
 
   HighSchoolStudent({
     required int id,
@@ -36,10 +37,12 @@ class HighSchoolStudent extends User {
     required this.highschool,
     required this.education,
     required this.city,
-    required this.imagePath,
+    this.description,
+    this.imagePath,
   }) : super(id: id, email: email, name: name);
 
   factory HighSchoolStudent.fromJson(Map<String, dynamic> json) {
+    print("hs factory");
     // Skapa en instans av HighSchoolStudent från JSON-data
     return HighSchoolStudent(
       id: json['id'],
@@ -49,7 +52,7 @@ class HighSchoolStudent extends User {
       highschool: json['highschool'],
       education: json['education'],
       city: json['city'],
-      imagePath: json['imagePath'],
+      imagePath: json['imagePath'], description: 'testBeskrivning',
     );
   }
 }
@@ -60,7 +63,7 @@ class UniversityStudent extends User {
   final String programID;
   final int year;
   final String city;
-  final String imagePath;
+  final String? imagePath;
 
   UniversityStudent({
     required int id,
@@ -71,7 +74,7 @@ class UniversityStudent extends User {
     required this.programID,
     required this.year,
     required this.city,
-    required this.imagePath,
+    this.imagePath,
   }) : super(id: id, email: email, name: name);
 
   factory UniversityStudent.fromJson(Map<String, dynamic> json) {

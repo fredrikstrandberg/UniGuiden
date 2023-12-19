@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:untitled/account/check_account.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/account/user.dart';
+import 'package:untitled/account/userProvider.dart';
 
 
 
@@ -48,7 +50,7 @@ handleLogin(context, email, password) async {
       return handleLoginError(context, "Email är inte registrerad");
     }
 
-    else if (await authenticateUser(email, password)) {
+    else if (await authenticateUser(context, email, password)) {
       print("correct");
 
       Navigator.pushReplacementNamed(context, "/main");
@@ -61,7 +63,7 @@ handleLogin(context, email, password) async {
   }
 }
 
-Future<bool> authenticateUser(String email, String password) async {
+Future<bool> authenticateUser(BuildContext context, String email, String password) async {
   final url = Uri.parse('http://10.0.2.2:3000/login');
 
   try {
@@ -77,16 +79,28 @@ Future<bool> authenticateUser(String email, String password) async {
       final data = json.decode(response.body);
       final success = data['success'];
       final token = data['token'];
-      final role = data["role"];
-      final userInfoJson = data["user"];
+      final role = data['role'];
+      final userInfo = data['user'] as Map<String, dynamic>;
 
-      // Konvertera JSON till ett Map-objekt
-      Map<String, dynamic> userInfo = json.decode(userInfoJson);
-
-      print(token);
-      print(userInfo);
+      if (role == null) {
+        print('Användarroll saknas');
+        // Handle the case where the 'role' is null (if needed)
+        return false;
+      }
       print(role);
+      print('Role: $role');
 
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      print("provider klar");
+      final loggedInUser = User.fromJson(userInfo, role: role);
+      print("loggedInUser klar");
+
+      userProvider.setLoggedInUser(loggedInUser);
+      print("setLoggedInUser klar");
+
+      print('Token: $token');
+      print('UserInfo: $userInfo');
+      print('Role: $role');
 
       saveTokenLocally(token, userInfo, role);
 
@@ -98,7 +112,7 @@ Future<bool> authenticateUser(String email, String password) async {
         return false;
       }
     } else {
-      print('Inloggning misslyckades');
+      print('Inloggning misslyckades. Status code: ${response.statusCode}');
       return false;
     }
   } catch (error) {
@@ -106,6 +120,7 @@ Future<bool> authenticateUser(String email, String password) async {
     return false;
   }
 }
+
 
 
 
@@ -149,20 +164,6 @@ void saveTokenLocally(String token, Map<String, dynamic> user, role) async {
 
   // Beroende på användarroll, spara relevanta attribut
 
-  if (role == 'highschool') {
-    prefs.setString('userBirthdate', user['birthdate']);
-    prefs.setString('userHighschool', user['highschool']);
-    prefs.setString('userEducation', user['education']);
-    prefs.setString('userCity', user['city']);
-  } else if (role == 'university') {
-    prefs.setString('userAge', user['age'].toString());
-    prefs.setString('userUniversityID', user['universityID']);
-    prefs.setString('userProgramID', user['programID']);
-    prefs.setString('userYear', user['year'].toString());
-    prefs.setString('userCity', user['city']);
-  } else if (role == 'admin') {
-    prefs.setString('userAdminRole', user['adminRole']);
-  }
 
   // ... (sparar andra användarattribut beroende på behov)
 }

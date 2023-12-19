@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/pages/profile_page/edit_profile_page.dart';
-import '../../global_variables.dart';
+import '../../account/user.dart';
+import '../../account/userProvider.dart';
+//import '../../global_variables.dart';
 import '/pages/page_identifier.dart';
 import 'calculate_age.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
+  static const AssetImage defaultImageAsset = AssetImage('assets/profile.png');
+
 
   @override
   Widget build(BuildContext context) {
+    User curLoggedIn = Provider.of<UserProvider>(context).curLoggedIn;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -67,17 +74,19 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(10,30,10,0),
               child: Column(
                 children: [
-                  const CircleAvatar(
-                      radius: 100,
-                      backgroundImage: AssetImage("images/profile.png"),
-                      backgroundColor: Colors.transparent,
-                      ),
+                    CircleAvatar(
+                    radius: 100,
+                    backgroundImage: getAvatarImage(curLoggedIn),
+                    backgroundColor: Colors.transparent,
+                  ),
+
                   const SizedBox(height: 10),
                   Text(
-                    GlobalVariables.curLoggedIn.name,
+                    //GlobalVariables.curLoggedIn.name,
+                    curLoggedIn.name,
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: "YoungSerif",
+                      fontSize: 20,
+                      fontFamily: "YoungSerif",
                     ),
                   ),
                   const SizedBox(height: 40),
@@ -100,7 +109,10 @@ class ProfilePage extends StatelessWidget {
                                     Icons.school
                                 ),
                                 const SizedBox(width: 5),
-                                Text(GlobalVariables.curLoggedIn.highschool,
+                                Text(
+                                  curLoggedIn is HighSchoolStudent
+                                      ? curLoggedIn.highschool
+                                      : 'N/A', // or any default value if the user is not a HighSchoolStudent
                                   style: const TextStyle(
                                     fontFamily: "YoungSerif",
                                     fontSize: 15,
@@ -116,10 +128,12 @@ class ProfilePage extends StatelessWidget {
                                     Icons.my_library_books_rounded
                                 ),
                                 const SizedBox(width: 5),
-                                Text(GlobalVariables.curLoggedIn.education,
+                                Text( curLoggedIn is HighSchoolStudent
+                                    ? curLoggedIn.education
+                                    : 'N/A', // or any default value if the user is not a HighSchoolStudent
                                   style: const TextStyle(
                                     fontFamily: "YoungSerif",
-                                    fontSize: 14,
+                                    fontSize: 15,
                                   ),
                                 ),
                               ],
@@ -138,7 +152,9 @@ class ProfilePage extends StatelessWidget {
                                     Icons.location_city
                                 ),
                                 const SizedBox(width: 5),
-                                Text(GlobalVariables.curLoggedIn.city,
+                                Text( curLoggedIn is HighSchoolStudent
+                                    ? curLoggedIn.city
+                                    : 'N/A', // or any default value if the user is not a HighSchoolStudent
                                   style: const TextStyle(
                                     fontFamily: "YoungSerif",
                                     fontSize: 15,
@@ -154,9 +170,20 @@ class ProfilePage extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  "${calculateAge(
-                                      GlobalVariables.curLoggedIn.birthdate
-                                  )} år",
+                                  (() {
+                                    try {
+                                      if (curLoggedIn is HighSchoolStudent) {
+                                        return "${calculateAge(
+                                          DateTime.parse(curLoggedIn.birthdate),
+                                        )} år";
+                                      } else {
+                                        // Handle other user types or provide a default value
+                                        return "N/A";
+                                      }
+                                    } catch (e) {
+                                      return "Invalid date format";
+                                    }
+                                  })(),
                                   style: const TextStyle(
                                     fontFamily: "YoungSerif",
                                     fontSize: 14,
@@ -166,7 +193,6 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ],
                         )
-
                       ],
                     ),
                   ),
@@ -193,7 +219,7 @@ class ProfilePage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 10),
-                            getDescriptionText(),
+                            getDescriptionText(curLoggedIn),
                             SizedBox(height: 10),
                           ],
                         ),
@@ -211,24 +237,34 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Text getDescriptionText() {
+  Text getDescriptionText(dynamic curLoggedIn) {
     String descriptionText;
     Color descriptionColor;
-    if (GlobalVariables.curLoggedIn.description.isEmpty) {
+
+    if (curLoggedIn is HighSchoolStudent && (curLoggedIn as HighSchoolStudent).description!.isEmpty) {
       descriptionText = "Berätta om dig själv!";
       descriptionColor = Colors.black54;
-    }
-    else {
-      descriptionText = GlobalVariables.curLoggedIn.description;
+    } else {
+      // Handle other user types or provide a default value
+      descriptionText = "N/A";
       descriptionColor = Colors.black;
     }
+
     return Text(
       descriptionText,
       style: TextStyle(
-          fontFamily: "YoungSerif",
-          fontSize: 12,
-          color: descriptionColor,
+        fontFamily: "YoungSerif",
+        fontSize: 12,
+        color: descriptionColor,
       ),
     );
   }
+  ImageProvider<Object> getAvatarImage(User user) {
+    if (user is HighSchoolStudent && user.imagePath != null && user.imagePath!.isNotEmpty) {
+      return NetworkImage(user.imagePath!);
+    } else {
+      return defaultImageAsset;
+    }
+  }
+
 }
