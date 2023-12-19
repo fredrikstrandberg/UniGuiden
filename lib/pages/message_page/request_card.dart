@@ -36,7 +36,7 @@ class RequestCard extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   child: SizedBox(
                       child: ClipOval(
-                        child: Image.asset("images/${request.receiver.imageName}",
+                        child: Image.asset("images/${request.receiver.imagePath}",
                         ),
                       )
                   )

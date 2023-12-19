@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 
 
 
-CreateAccount(context, String email, password, name, birthdate, highschool, education, city, description) {
+/*CreateAccount(context, String email, password, name, birthdate, highschool, education, city, description) {
 
   email = email.toLowerCase();
 
@@ -34,7 +34,7 @@ CreateAccount(context, String email, password, name, birthdate, highschool, educ
   handleLogin(context, email, password);
 
   // Navigator.pushNamedAndRemoveUntil(context, "/main", (Route<dynamic> route) => false);
-}
+}*/
 
 Future<void> createAccountAndLogin(
     BuildContext context,

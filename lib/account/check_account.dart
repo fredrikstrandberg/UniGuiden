@@ -9,7 +9,7 @@ checkAccount(context, email, password, repeatPassword) async {
   bool validEmail = EmailValidator.validate(email);
   bool passInput = password.toString().isNotEmpty;
   bool repeatPassInput = repeatPassword.toString().isNotEmpty;
-  List regEmails = accountMap.keys.toList();
+  //List regEmails = accountMap.keys.toList();
   // bool passLengthCheck = (password.toString().length >= 8);
 
   if (!validEmail || !passInput || !repeatPassInput) {

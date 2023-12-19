@@ -2,7 +2,7 @@ import 'package:untitled/pages/message_page/request.dart';
 import '../students_page/student_list.dart';
 
 final Map<String, List<Request>?> accountSentRequests = {
-  "admin@admin.se" : [],
+  /*"admin@admin.se" : [],
   "john@doe.se" : [
     Request( // testRequest
       receiver: students[students.indexWhere((student) => student.name == "Jesper Senke")],
@@ -18,5 +18,5 @@ final Map<String, List<Request>?> accountSentRequests = {
       answered: true,
       accepted: false,
     ),
-  ],
+  ],*/
 };

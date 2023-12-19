@@ -3,7 +3,7 @@ import 'message.dart';
 
 final Map<String, List<Message>> conversations = {
 
-  "john@doe.se" : [
+/*  "john@doe.se" : [
     Message(
       student: students[students.indexWhere((student) => student.name == "Jesper Senke")],
       accountSender: false,
@@ -16,7 +16,7 @@ final Map<String, List<Message>> conversations = {
         time: DateTime(2023,11,04,19,40),
         message: "Tack för hjälpen!"
     ),
-  ],
+  ],*/
 
 };
 

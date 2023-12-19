@@ -50,7 +50,7 @@ class ShowConversation extends StatelessWidget {
                         const SizedBox(width: 50),
                         CircleAvatar(
                           radius: 50,
-                          backgroundImage:AssetImage("images/${request.receiver.imageName}"),
+                          backgroundImage:AssetImage("images/${request.receiver.imagePath}"),
                           backgroundColor: Colors.transparent,
                         ),
                         SizedBox(
@@ -258,7 +258,7 @@ class CustomMessageCard extends StatelessWidget {
 
     String imageLink = "profile.png";
     if (!message.accountSender) {
-      imageLink = message.student.imageName;
+      imageLink = message.student.imagePath;
     }
 
     Widget circleAvatar = CircleAvatar(

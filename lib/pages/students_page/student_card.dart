@@ -79,14 +79,17 @@ class StudentCard extends StatelessWidget {
                 ],
               ),
               CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.transparent,
-                  child: SizedBox(
-                      child: ClipOval(
-                        child: Image.asset("images/${student.imageName}",
-                        ),
-                      )
-                  )
+                radius: 50,
+                backgroundColor: Colors.transparent,
+                child: SizedBox(
+                  width: 100, // Set a fixed width or adjust as needed
+                  height: 100, // Set a fixed height or adjust as needed
+                  child: ClipOval(
+                    child: Image(
+                      image: NetworkImage(student.imagePath),
+                    ),
+                  ),
+                ),
               )
             ],
 

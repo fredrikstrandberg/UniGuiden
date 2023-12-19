@@ -3,6 +3,9 @@ import 'package:email_validator/email_validator.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:untitled/account/check_account.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled/account/user.dart';
+
 
 
 
@@ -59,9 +62,8 @@ handleLogin(context, email, password) async {
 }
 
 Future<bool> authenticateUser(String email, String password) async {
-  final url = Uri.parse('http://10.0.2.2:3000/login'); // Byt ut detta med din serverens URL.
-  //final url = Uri.http("10.0.2.2:3000", "/login");
-  //final url = "http://localhost:3000/login";
+  final url = Uri.parse('http://10.0.2.2:3000/login');
+
   try {
     final response = await http.post(
       url,
@@ -74,28 +76,37 @@ Future<bool> authenticateUser(String email, String password) async {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final success = data['success'];
+      final token = data['token'];
+      final role = data["role"];
+      final userInfoJson = data["user"];
+
+      // Konvertera JSON till ett Map-objekt
+      Map<String, dynamic> userInfo = json.decode(userInfoJson);
+
+      print(token);
+      print(userInfo);
+      print(role);
+
+
+      saveTokenLocally(token, userInfo, role);
 
       if (success == true) {
-        // Inloggning lyckades
         print('Inloggning lyckades');
         return true;
       } else {
-        // Inloggning misslyckades
         print('Inloggning misslyckades, fel lösen');
         return false;
       }
     } else {
-      // Inloggning misslyckades
       print('Inloggning misslyckades');
       return false;
     }
   } catch (error) {
-    // Något gick fel
     print('Något gick fel: $error');
     return false;
-
   }
 }
+
 
 
 
@@ -127,4 +138,31 @@ handleLoginError(context, errorString) {
     ),
   );
   return false;
+}
+
+void saveTokenLocally(String token, Map<String, dynamic> user, role) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString('token', token);
+  prefs.setString('userId', user['id'].toString());
+  prefs.setString('userEmail', user['email']);
+  prefs.setString('userName', user['name']);
+
+  // Beroende på användarroll, spara relevanta attribut
+
+  if (role == 'highschool') {
+    prefs.setString('userBirthdate', user['birthdate']);
+    prefs.setString('userHighschool', user['highschool']);
+    prefs.setString('userEducation', user['education']);
+    prefs.setString('userCity', user['city']);
+  } else if (role == 'university') {
+    prefs.setString('userAge', user['age'].toString());
+    prefs.setString('userUniversityID', user['universityID']);
+    prefs.setString('userProgramID', user['programID']);
+    prefs.setString('userYear', user['year'].toString());
+    prefs.setString('userCity', user['city']);
+  } else if (role == 'admin') {
+    prefs.setString('userAdminRole', user['adminRole']);
+  }
+
+  // ... (sparar andra användarattribut beroende på behov)
 }

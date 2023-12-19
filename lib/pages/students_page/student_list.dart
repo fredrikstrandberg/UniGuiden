@@ -1,5 +1,5 @@
 import 'student.dart';
-
+/*
 final List<Student> students = [
   Student(
     name: "Fredrik Strandberg",
@@ -52,34 +52,40 @@ final List<Student> students = [
     ambassador: true,
   ),
 
-];
-/*
+];*/
 
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<List<University>> fetchUniversities() async {
-  print("fetching unis");
+Future<List<Student>> fetchStudents() async {
+  print("fetching students");
 
 
-  final url = Uri.parse('http://10.0.2.2:3000/getUniversities');
+  final url = Uri.parse('http://10.0.2.2:3000/getStudents');
   final response = await http.get(url);
   if (response.statusCode == 200) {
     //email finns registerad
-    print("finns universitet");
+    print("finns studenter");
     final Map<String, dynamic> data = json.decode(response.body);
     if (data['success'] == true) {
-      final List<dynamic> universitiesData = data['universities'];
-      final List<University> universities = universitiesData.map((item) {
-        return University(
-          name: item['name'],
-          city: item['city'],
-          imagePath: item['imagePath'], // Använd imagePath istället för imageName
-          description: item['uniDescription'],
+      print(data);
+      final List<dynamic> studentsData = data['students'];
+      final List<Student> students = studentsData.map((item) {
+        return Student(
+          name: item["name"],
+          age: item["age"],
+          university: item["universityName"],
+          program: item["programID"],
+          year: item["year"],
+          city: item["city"],
+          imagePath: item["imagePath"],
+          ambassador: item["ambassador"],
         );
       }).toList();
-      return universities;
+      print("hämtat studenter");
+      print(students);
+      return students;
     } else {
       throw Exception('Failed to load universities');
     }
@@ -87,6 +93,5 @@ Future<List<University>> fetchUniversities() async {
     throw Exception('Failed to load universities');
   }
 }
-*/
 
 

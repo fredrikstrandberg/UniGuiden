@@ -6,7 +6,7 @@ class Student {
   String program;
   int year;
   String city;
-  String imageName;
+  String imagePath;
   bool ambassador;
 
   Student({
@@ -16,7 +16,7 @@ class Student {
     required this.program,
     required this.year,
     required this.city,
-    required this.imageName,
+    required this.imagePath,
     required this.ambassador,
   });
 
